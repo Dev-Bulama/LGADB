@@ -102,19 +102,23 @@
         </form>
 
         <!-- CTA links below search -->
-        <div class="flex items-center justify-center gap-6 mt-8 text-sm">
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-8 text-sm">
             <a href="{{ route('verify.index') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
                 Advanced Search
             </a>
-            <span class="text-green-600">|</span>
-            <a href="{{ route('login') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
-                Worker Login
+            <span class="text-green-500">|</span>
+            <a href="{{ route('register') }}" class="bg-white text-green-800 font-semibold px-4 py-1.5 rounded-full hover:bg-green-50 transition shadow">
+                Register as Staff
             </a>
+            <span class="text-green-500">|</span>
             @auth
-            <span class="text-green-600">|</span>
-            <a href="{{ route('portal.dashboard') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
-                My Portal
-            </a>
+                <a href="{{ route('portal.dashboard') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
+                    My Portal
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
+                    Worker Login
+                </a>
             @endauth
         </div>
     </div>

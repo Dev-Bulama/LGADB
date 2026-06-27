@@ -59,16 +59,16 @@
                        class="text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition {{ request()->routeIs('contact') ? 'bg-green-700 text-white' : '' }}">
                         Contact
                     </a>
+                    <a href="{{ route('register') }}"
+                       class="text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition {{ request()->routeIs('register') ? 'bg-green-700 text-white' : '' }}">
+                        Register
+                    </a>
                     @auth
                         <a href="{{ route('portal.dashboard') }}"
-                           class="ml-3 bg-white text-green-800 hover:bg-green-50 px-4 py-2 rounded-md text-sm font-semibold transition shadow">
+                           class="ml-2 bg-white text-green-800 hover:bg-green-50 px-4 py-2 rounded-md text-sm font-semibold transition shadow">
                             My Portal
                         </a>
                     @else
-                        <a href="{{ route('register') }}"
-                           class="text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition">
-                            Register
-                        </a>
                         <a href="{{ route('login') }}"
                            class="ml-2 bg-white text-green-800 hover:bg-green-50 px-4 py-2 rounded-md text-sm font-semibold transition shadow">
                             Login
@@ -96,10 +96,10 @@
                 <a href="{{ route('news') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">News</a>
                 <a href="{{ route('faqs') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">FAQs</a>
                 <a href="{{ route('contact') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                <a href="{{ route('register') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Register</a>
                 @auth
                     <a href="{{ route('portal.dashboard') }}" class="block text-green-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Portal</a>
                 @else
-                    <a href="{{ route('register') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Register</a>
                     <a href="{{ route('login') }}" class="block text-green-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
                 @endauth
             </div>
