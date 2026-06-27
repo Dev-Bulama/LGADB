@@ -29,18 +29,18 @@
             </div>
             @if($worker)
                 <div class="text-right">
-                    @if($worker->verification_status->value === 'approved')
+                    @if($worker->verification_status?->value === 'approved')
                         <span class="inline-flex items-center bg-green-400 text-green-900 text-xs font-bold px-4 py-2 rounded-full">
                             <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             Verified Staff
                         </span>
-                    @elseif($worker->verification_status->value === 'pending')
+                    @elseif($worker->verification_status?->value === 'pending')
                         <span class="inline-flex items-center bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-2 rounded-full">
                             ⏳ Verification Pending
                         </span>
-                    @elseif($worker->verification_status->value === 'under_review')
+                    @elseif($worker->verification_status?->value === 'under_review')
                         <span class="inline-flex items-center bg-blue-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-full">
                             🔍 Under Review
                         </span>
@@ -60,7 +60,7 @@
     <div>
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Quick Actions</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            @if($worker->verification_status->value === 'approved')
+            @if($worker->verification_status?->value === 'approved')
             <a href="{{ route('portal.id-card') }}"
                class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex flex-col items-center text-center hover:border-green-300 hover:shadow-md transition group">
                 <div class="w-10 h-10 bg-green-100 group-hover:bg-green-200 rounded-lg flex items-center justify-center mb-2 transition">
@@ -163,7 +163,7 @@
             </h2>
 
             @php
-                $vs = $worker->verification_status->value;
+                $vs = $worker->verification_status?->value;
                 $statusConfig = match($vs) {
                     'approved' => ['bg' => 'bg-green-50', 'border' => 'border-green-200', 'icon' => 'text-green-500', 'title' => 'Verified & Approved', 'desc' => 'Your record is verified. You can download your ID card.', 'color' => 'text-green-700'],
                     'pending' => ['bg' => 'bg-yellow-50', 'border' => 'border-yellow-200', 'icon' => 'text-yellow-500', 'title' => 'Pending Verification', 'desc' => 'Your record is awaiting review by the LGA administration.', 'color' => 'text-yellow-700'],

@@ -19,14 +19,6 @@ class Dashboard extends BaseDashboard
         return 2;
     }
 
-    public function getWidgets(): array
-    {
-        return [
-            StatsOverviewWidget::class,
-            RecentWorkersWidget::class,
-        ];
-    }
-
     public function getHeaderWidgets(): array
     {
         return [

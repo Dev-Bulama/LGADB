@@ -4,7 +4,16 @@
 @section('content')
 <div class="space-y-6">
     @if(session('success'))
-    <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-green-700">{{ session('success') }}</div>
+    <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-green-700 text-sm font-medium">{{ session('success') }}</div>
+    @endif
+    @if($errors->any())
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
+        <ul class="list-disc list-inside space-y-1">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <!-- Profile Header -->
@@ -23,8 +32,8 @@
                 <p class="text-gray-500 text-sm">{{ $worker?->staff_number ?? 'Pending assignment' }}</p>
                 @if($worker)
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1
-                    {{ $worker->verification_status->value === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                    {{ $worker->verification_status->label() }}
+                    {{ $worker->verification_status?->value === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                    {{ $worker->verification_status?->label() ?? 'Pending' }}
                 </span>
                 @endif
             </div>

@@ -89,7 +89,7 @@ class SettingResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('group')
-                    ->options(fn () => Setting::distinct()->pluck('group', 'group')->filter()->toArray())
+                    ->options(fn () => Setting::select('group')->distinct()->pluck('group', 'group')->filter()->toArray())
                     ->label('Group'),
             ])
             ->actions([

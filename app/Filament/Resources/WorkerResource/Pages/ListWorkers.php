@@ -38,7 +38,8 @@ class ListWorkers extends ListRecords
 
             'suspended' => Tab::make('Suspended')
                 ->icon('heroicon-o-no-symbol')
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', WorkerStatus::Suspended)),
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', WorkerStatus::Suspended))
+                ->badge(fn () => static::getResource()::getModel()::where('status', WorkerStatus::Suspended)->count()),
         ];
     }
 }

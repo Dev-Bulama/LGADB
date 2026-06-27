@@ -5,6 +5,7 @@ namespace App\Filament\Resources\WorkerResource\Pages;
 use App\Filament\Resources\WorkerResource;
 use App\Enums\WorkerStatus;
 use App\Enums\VerificationStatus;
+use App\Services\IdCardService;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
@@ -34,7 +35,7 @@ class ViewWorker extends ViewRecord
                         ->title('Worker Verified')
                         ->success()
                         ->send();
-                    $this->refreshFormData(['status', 'verification_status', 'verified_at']);
+                    $this->redirect($this->getResource()::getUrl('view', ['record' => $this->record]));
                 })
                 ->visible(fn () => $this->record->verification_status !== VerificationStatus::Approved),
 
@@ -49,7 +50,7 @@ class ViewWorker extends ViewRecord
                         ->title('Worker Suspended')
                         ->warning()
                         ->send();
-                    $this->refreshFormData(['status']);
+                    $this->redirect($this->getResource()::getUrl('view', ['record' => $this->record]));
                 })
                 ->visible(fn () => $this->record->status !== WorkerStatus::Suspended),
 
@@ -59,11 +60,19 @@ class ViewWorker extends ViewRecord
                 ->color('info')
                 ->requiresConfirmation()
                 ->action(function () {
-                    $this->record->update(['id_card_generated_at' => now()]);
-                    Notification::make()
-                        ->title('ID Card Generated')
-                        ->success()
-                        ->send();
+                    try {
+                        (new IdCardService())->generate($this->record);
+                        Notification::make()
+                            ->title('ID Card Generated')
+                            ->success()
+                            ->send();
+                    } catch (\Throwable $e) {
+                        Notification::make()
+                            ->title('ID Card generation failed')
+                            ->body($e->getMessage())
+                            ->danger()
+                            ->send();
+                    }
                 }),
 
             Actions\DeleteAction::make(),

@@ -25,6 +25,28 @@ class PublicController extends Controller
         return view('public.contact');
     }
 
+    public function contactSubmit(Request $request)
+    {
+        $request->validate([
+            'name'    => 'required|string|max:150',
+            'email'   => 'required|email|max:255',
+            'phone'   => 'nullable|string|max:20',
+            'subject' => 'required|string|max:100',
+            'message' => 'required|string|min:10|max:5000',
+        ]);
+
+        // Store as a simple notification or log entry for now.
+        // In production, wire to a ContactMessage model or dispatch a mail notification.
+        \Illuminate\Support\Facades\Log::info('Contact form submission', [
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'subject' => $request->subject,
+        ]);
+
+        return redirect()->route('contact')
+            ->with('success', 'Thank you for your message. We will get back to you within 1-2 business days.');
+    }
+
     public function news()
     {
         $announcements = Announcement::published()->latest('published_at')->paginate(12);

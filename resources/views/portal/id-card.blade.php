@@ -3,13 +3,13 @@
 @section('page-title', 'My ID Card')
 @section('content')
 <div class="max-w-2xl mx-auto">
-    @if($worker && $worker->verification_status->value === 'approved')
+    @if($worker && $worker->verification_status?->value === 'approved')
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <!-- ID Card Preview -->
             <div class="bg-gradient-to-br from-green-800 to-green-600 p-8 text-white">
                 <div class="text-center mb-4">
                     <div class="text-xs uppercase tracking-widest text-green-200 mb-1">Federal Republic of Nigeria</div>
-                    <div class="font-bold text-lg">{{ env('LGA_NAME', 'LGA') }}</div>
+                    <div class="font-bold text-lg">{{ config('lga.name') }}</div>
                     <div class="text-green-200 text-sm">Official Staff Identification Card</div>
                 </div>
                 <div class="flex items-center space-x-4 bg-white/10 rounded-xl p-4">
@@ -56,8 +56,8 @@
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">ID Card Not Available</h3>
             <p class="text-gray-500">Your ID card will be available after your verification is approved by HR. Current status: 
-                <span class="font-medium {{ $worker?->verification_status->value === 'pending' ? 'text-yellow-600' : 'text-blue-600' }}">
-                    {{ $worker?->verification_status->label() ?? 'Not Registered' }}
+                <span class="font-medium {{ $worker?->verification_status?->value === 'pending' ? 'text-yellow-600' : 'text-blue-600' }}">
+                    {{ $worker?->verification_status?->label() ?? 'Not Registered' }}
                 </span>
             </p>
         </div>

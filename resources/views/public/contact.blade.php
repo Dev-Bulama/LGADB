@@ -25,10 +25,10 @@
                     </svg>
                 </div>
                 <h3 class="font-bold text-gray-800 mb-1 text-sm">Office Address</h3>
-                <p class="text-gray-500 text-sm">{{ env('LGA_ADDRESS', 'LGA Secretariat, Nigeria') }}</p>
+                <p class="text-gray-500 text-sm">{{ config('lga.address') }}</p>
             </div>
 
-            @if(env('LGA_PHONE'))
+            @if(config('lga.phone'))
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
                 <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
                     <svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,11 +36,11 @@
                     </svg>
                 </div>
                 <h3 class="font-bold text-gray-800 mb-1 text-sm">Phone Number</h3>
-                <a href="tel:{{ env('LGA_PHONE') }}" class="text-green-700 text-sm hover:underline">{{ env('LGA_PHONE') }}</a>
+                <a href="tel:{{ config('lga.phone') }}" class="text-green-700 text-sm hover:underline">{{ config('lga.phone') }}</a>
             </div>
             @endif
 
-            @if(env('LGA_EMAIL'))
+            @if(config('lga.email'))
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
                 <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
                     <svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@
                     </svg>
                 </div>
                 <h3 class="font-bold text-gray-800 mb-1 text-sm">Email Address</h3>
-                <a href="mailto:{{ env('LGA_EMAIL') }}" class="text-green-700 text-sm hover:underline">{{ env('LGA_EMAIL') }}</a>
+                <a href="mailto:{{ config('lga.email') }}" class="text-green-700 text-sm hover:underline">{{ config('lga.email') }}</a>
             </div>
             @endif
 
@@ -70,7 +70,12 @@
                     <h2 class="font-bold text-green-800 text-lg">Send Us a Message</h2>
                     <p class="text-green-700 text-sm mt-0.5">We typically respond within 1-2 business days.</p>
                 </div>
-                <form class="p-6 space-y-4" action="#" method="POST">
+                @if(session('success'))
+                    <div class="mx-6 mt-6 bg-green-50 border border-green-300 text-green-800 px-4 py-3 rounded-lg text-sm font-medium">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <form class="p-6 space-y-4" action="{{ route('contact.submit') }}" method="POST">
                     @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>

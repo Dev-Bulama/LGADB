@@ -11,9 +11,9 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
     
-    // Public verification
-    Route::get('/verify/{code}', [VerificationController::class, 'verify']);
+    // Public verification (static segment before wildcard)
     Route::get('/verify/qr/{hash}', [VerificationController::class, 'qrVerify']);
+    Route::get('/verify/{code}', [VerificationController::class, 'verify']);
     Route::post('/verify/search', [VerificationController::class, 'search']);
     
     // Authenticated endpoints

@@ -316,7 +316,7 @@
         <div class="back-section" style="margin-top:2mm;">
             <div class="back-label">Verification URL</div>
             <div class="back-value" style="font-family: monospace; font-size:4.5pt; color:#047857;">
-                {{ url('/verify/' . $worker->verification_code) }}
+                {{ route('verify.show', $worker->verification_code) }}
             </div>
         </div>
 
@@ -327,7 +327,7 @@
             </div>
             <div class="back-url">
                 <div style="font-size:3.5pt; color:#6b7280; margin-bottom:1mm;">Hotline</div>
-                <div>{{ env('LGA_PHONE', 'N/A') }}</div>
+                <div>{{ config('lga.phone', 'N/A') }}</div>
                 <div style="margin-top:1mm; font-size:3.5pt; color:#6b7280;">Website</div>
                 <div style="font-size:4pt;">{{ str_replace(['https://', 'http://'], '', url('/')) }}</div>
             </div>

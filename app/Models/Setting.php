@@ -14,6 +14,17 @@ class Setting extends Model
         'description',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function (Setting $setting) {
+            Cache::forget("setting_{$setting->key}");
+        });
+
+        static::deleted(function (Setting $setting) {
+            Cache::forget("setting_{$setting->key}");
+        });
+    }
+
     public static function get(string $key, mixed $default = null): mixed
     {
         return Cache::rememberForever("setting_{$key}", function () use ($key, $default) {

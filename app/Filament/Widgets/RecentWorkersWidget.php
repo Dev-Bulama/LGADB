@@ -57,7 +57,7 @@ class RecentWorkersWidget extends BaseWidget
                 Tables\Actions\Action::make('view')
                     ->label('View')
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Worker $record) => route('filament.admin.resources.workers.view', $record)),
+                    ->url(fn (Worker $record) => \App\Filament\Resources\WorkerResource::getUrl('view', ['record' => $record])),
             ])
             ->paginated(false);
     }

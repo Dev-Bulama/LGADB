@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AnnouncementResource\Pages;
 use App\Models\Announcement;
 use Filament\Forms;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
@@ -73,7 +74,11 @@ class AnnouncementResource extends Resource
                     ->columnSpanFull(),
 
                 Forms\Components\Grid::make(2)->schema([
-                    Forms\Components\Toggle::make('is_published')
+                    Forms\Components\Hidden::make('author_id')
+                        ->default(fn () => Auth::id())
+                        ->dehydrated(),
+
+                Forms\Components\Toggle::make('is_published')
                         ->label('Published')
                         ->default(false)
                         ->live(),
@@ -108,7 +113,7 @@ class AnnouncementResource extends Resource
                         'download'     => 'gray',
                         default        => 'primary',
                     })
-                    ->formatStateUsing(fn (string $state) => ucfirst($state)),
+                    ->formatStateUsing(fn (?string $state) => $state ? ucfirst($state) : '—'),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Published')
