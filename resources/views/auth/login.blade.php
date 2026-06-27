@@ -112,9 +112,13 @@
             </form>
         </div>
 
-        <div class="text-center">
+        <div class="text-center space-y-2">
+            <p class="text-sm text-gray-600">
+                New staff member?
+                <a href="{{ route('register') }}" class="text-green-700 font-semibold hover:underline">Register here</a>
+            </p>
             <p class="text-xs text-gray-400">
-                Having trouble logging in? <a href="{{ route('contact') }}" class="text-green-700 font-semibold hover:underline">Contact Support</a>
+                Having trouble? <a href="{{ route('contact') }}" class="text-green-700 font-semibold hover:underline">Contact Support</a>
             </p>
         </div>
 
