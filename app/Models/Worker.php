@@ -265,8 +265,13 @@ class Worker extends Model implements HasMedia
     {
         $prefix = 'LGA';
         $year = now()->format('Y');
-        $sequence = str_pad(static::withTrashed()->count() + 1, 5, '0', STR_PAD_LEFT);
-        return "{$prefix}/{$year}/{$sequence}";
+
+        do {
+            $sequence = str_pad(static::withTrashed()->count() + 1, 5, '0', STR_PAD_LEFT);
+            $number = "{$prefix}/{$year}/{$sequence}";
+        } while (static::withTrashed()->where('staff_number', $number)->exists());
+
+        return $number;
     }
 
     public static function generateVerificationCode(): string

@@ -12,10 +12,7 @@
         <p class="text-sm text-gray-400">A record of your employment history within the LGA.</p>
     </div>
 
-    @php
-        $worker = Auth::user()->worker ?? null;
-        $histories = $worker ? $worker->employmentHistories()->orderByDesc('effective_date')->get() : collect();
-    @endphp
+    {{-- $worker and $histories are passed from WorkerPortalController --}}
 
     @if($histories->isEmpty())
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-14 text-center">
@@ -84,6 +81,10 @@
                 @endforeach
             </div>
         </div>
+    @endif
+
+    @if(method_exists($histories, 'links') && $histories->hasPages())
+        <div class="mt-4">{{ $histories->links() }}</div>
     @endif
 
 </div>

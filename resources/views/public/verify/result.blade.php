@@ -7,7 +7,7 @@
 <div class="gov-gradient py-10">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Verification Result</h1>
-        <p class="text-green-100">Search query: <strong>{{ $query }}</strong></p>
+        <p class="text-green-100">Search query: <strong>{{ $query ?? '' }}</strong></p>
     </div>
 </div>
 
@@ -113,7 +113,7 @@
             </svg>
             <div>
                 <p class="text-red-800 font-semibold">No Verified Staff Record Found</p>
-                <p class="text-red-700 text-sm">The search query "<strong>{{ $query }}</strong>" did not match any approved staff records.</p>
+                <p class="text-red-700 text-sm">The search query "<strong>{{ $query ?? '' }}</strong>" did not match any approved staff records.</p>
             </div>
         </div>
 

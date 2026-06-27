@@ -26,8 +26,7 @@ class StatsOverviewWidget extends BaseWidget
             Stat::make('Total Workers', $totalWorkers)
                 ->description('All registered workers')
                 ->descriptionIcon('heroicon-o-users')
-                ->color('primary')
-                ->chart([$totalWorkers]),
+                ->color('primary'),
 
             Stat::make('Active Staff', $activeWorkers)
                 ->description('Currently active employees')

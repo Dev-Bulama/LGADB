@@ -94,7 +94,7 @@
             </div>
             <h2 class="text-xl font-bold text-gray-800 mb-2">QR Code Not Valid</h2>
             <p class="text-gray-500 text-sm max-w-sm mx-auto mb-2">
-                The scanned QR code (hash: <code class="text-xs bg-gray-100 px-1 rounded">{{ substr($hash, 0, 16) }}...</code>) does not correspond to any approved staff member.
+                The scanned QR code (hash: <code class="text-xs bg-gray-100 px-1 rounded">{{ isset($hash) ? substr($hash, 0, 16) : '...' }}...</code>) does not correspond to any approved staff member.
             </p>
             <p class="text-red-600 text-sm font-medium mb-6">This may indicate a fraudulent or tampered ID card.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
