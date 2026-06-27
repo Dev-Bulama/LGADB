@@ -23,6 +23,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
+use App\Services\IdCardService;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -429,6 +430,11 @@ class WorkerResource extends Resource
                             'verified_at' => now(),
                             'verified_by' => auth()->id(),
                         ]);
+                        if ($record->user?->email) {
+                            try {
+                                $record->user->notify(new \App\Notifications\WorkerVerifiedNotification($record));
+                            } catch (\Throwable) {}
+                        }
                         Notification::make()
                             ->title('Worker Verified')
                             ->body("{$record->full_name} has been verified and set to Active.")
@@ -446,6 +452,11 @@ class WorkerResource extends Resource
                     ->modalDescription('Are you sure you want to suspend this worker?')
                     ->action(function (Worker $record) {
                         $record->update(['status' => WorkerStatus::Suspended]);
+                        if ($record->user?->email) {
+                            try {
+                                $record->user->notify(new \App\Notifications\WorkerSuspendedNotification($record));
+                            } catch (\Throwable) {}
+                        }
                         Notification::make()
                             ->title('Worker Suspended')
                             ->body("{$record->full_name} has been suspended.")
@@ -454,25 +465,100 @@ class WorkerResource extends Resource
                     })
                     ->visible(fn (Worker $record) => $record->status !== WorkerStatus::Suspended),
 
+                Tables\Actions\Action::make('reject')
+                    ->label('Reject')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->form([
+                        Forms\Components\Textarea::make('rejection_reason')
+                            ->label('Rejection Reason')
+                            ->required()
+                            ->rows(3)
+                            ->placeholder('Explain why this worker record is being rejected...'),
+                    ])
+                    ->action(function (Worker $record, array $data) {
+                        $record->update([
+                            'verification_status' => VerificationStatus::Rejected,
+                            'rejection_reason'    => $data['rejection_reason'],
+                        ]);
+                        if ($record->user?->email) {
+                            try {
+                                $record->user->notify(new \App\Notifications\WorkerRejectedNotification($record));
+                            } catch (\Throwable) {}
+                        }
+                        Notification::make()
+                            ->title('Worker Rejected')
+                            ->body("{$record->full_name}'s record has been rejected.")
+                            ->danger()
+                            ->send();
+                    })
+                    ->visible(fn (Worker $record) => $record->verification_status !== VerificationStatus::Rejected),
+
                 Tables\Actions\Action::make('generate_id')
-                    ->label('Generate ID Card')
+                    ->label('Generate ID')
                     ->icon('heroicon-o-identification')
                     ->color('info')
                     ->requiresConfirmation()
                     ->modalHeading('Generate ID Card')
-                    ->modalDescription('Generate an ID card for this worker?')
+                    ->modalDescription('Generate a PDF ID card for this worker?')
                     ->action(function (Worker $record) {
-                        $record->update(['id_card_generated_at' => now()]);
-                        Notification::make()
-                            ->title('ID Card Generated')
-                            ->body("ID card has been generated for {$record->full_name}.")
-                            ->success()
-                            ->send();
-                    }),
+                        try {
+                            (new IdCardService())->generate($record);
+                            Notification::make()
+                                ->title('ID Card Generated')
+                                ->body("ID card has been generated for {$record->full_name}.")
+                                ->success()
+                                ->send();
+                        } catch (\Throwable $e) {
+                            Notification::make()
+                                ->title('ID Card generation failed')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    })
+                    ->visible(fn (Worker $record) => $record->verification_status === VerificationStatus::Approved),
 
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('export_csv')
+                    ->label('Export CSV')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('gray')
+                    ->action(function () {
+                        $filename = 'workers-' . now()->format('Y-m-d') . '.csv';
+                        $headers  = [
+                            'Content-Type'        => 'text/csv',
+                            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+                        ];
+                        $workers = Worker::with(['department', 'unit', 'office'])
+                            ->orderBy('surname')->get();
+
+                        $callback = function () use ($workers) {
+                            $handle = fopen('php://output', 'w');
+                            fputcsv($handle, [
+                                'Staff Number', 'Surname', 'First Name', 'Middle Name',
+                                'Gender', 'Date of Birth', 'Email', 'Phone',
+                                'Department', 'Unit', 'Office', 'Designation',
+                                'Grade Level', 'Step', 'Employment Type', 'Employment Date',
+                                'Status', 'Verification Status', 'LGA',
+                            ]);
+                            foreach ($workers as $w) {
+                                fputcsv($handle, [
+                                    $w->staff_number, $w->surname, $w->first_name, $w->middle_name,
+                                    $w->gender?->value, $w->date_of_birth?->format('Y-m-d'), $w->email, $w->phone,
+                                    $w->department?->name, $w->unit?->name, $w->office?->name, $w->designation,
+                                    $w->grade_level, $w->step, $w->employment_type?->value, $w->employment_date?->format('Y-m-d'),
+                                    $w->status?->value, $w->verification_status?->value, $w->lga?->name,
+                                ]);
+                            }
+                            fclose($handle);
+                        };
+                        return response()->stream($callback, 200, $headers);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

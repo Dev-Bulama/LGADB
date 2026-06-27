@@ -6,6 +6,7 @@ use App\Models\WorkerDocument;
 use App\Services\IdCardService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class WorkerPortalController extends Controller
 {
@@ -44,6 +45,24 @@ class WorkerPortalController extends Controller
         }
 
         return redirect()->route('portal.profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'password'         => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        $user->update(['password' => Hash::make($request->password)]);
+
+        return redirect()->route('portal.profile')->with('success', 'Password changed successfully.');
     }
 
     public function idCard()

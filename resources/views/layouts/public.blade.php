@@ -31,7 +31,7 @@
                             <span class="text-green-800 font-extrabold text-sm">LGA</span>
                         </div>
                         <div class="hidden sm:block">
-                            <div class="text-white font-bold text-sm leading-tight">{{ config('app.name') }}</div>
+                            <div class="text-white font-bold text-sm leading-tight">{{ $appSettings['org_name'] ?? config('app.name') }}</div>
                             <div class="text-green-200 text-xs">Workforce Identity System</div>
                         </div>
                     </a>

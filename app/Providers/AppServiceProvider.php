@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\SettingsComposer;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(Login::class, function (Login $event) {
             $event->user->update(['last_login_at' => now()]);
         });
+
+        View::composer(['layouts.public', 'layouts.portal'], SettingsComposer::class);
     }
 }

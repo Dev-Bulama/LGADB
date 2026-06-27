@@ -31,6 +31,9 @@ class ViewWorker extends ViewRecord
                         'verified_at' => now(),
                         'verified_by' => auth()->id(),
                     ]);
+                    if ($this->record->user?->email) {
+                        $this->record->user->notify(new \App\Notifications\WorkerVerifiedNotification($this->record));
+                    }
                     Notification::make()
                         ->title('Worker Verified')
                         ->success()
@@ -46,6 +49,9 @@ class ViewWorker extends ViewRecord
                 ->requiresConfirmation()
                 ->action(function () {
                     $this->record->update(['status' => WorkerStatus::Suspended]);
+                    if ($this->record->user?->email) {
+                        $this->record->user->notify(new \App\Notifications\WorkerSuspendedNotification($this->record));
+                    }
                     Notification::make()
                         ->title('Worker Suspended')
                         ->warning()

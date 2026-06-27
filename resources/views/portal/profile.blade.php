@@ -92,5 +92,37 @@
         </div>
         @endif
     </div>
+
+    <!-- Change Password -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Change Password</h3>
+        <form action="{{ route('portal.profile.password') }}" method="POST" class="space-y-4 max-w-md">
+            @csrf
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                <input type="password" name="current_password"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent @error('current_password') border-red-400 @enderror">
+                @error('current_password')
+                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                <input type="password" name="password"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent @error('password') border-red-400 @enderror">
+                @error('password')
+                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                <input type="password" name="password_confirmation"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            </div>
+            <button type="submit" class="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-900 transition font-medium text-sm">
+                Update Password
+            </button>
+        </form>
+    </div>
 </div>
 @endsection

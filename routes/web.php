@@ -25,6 +25,7 @@ Route::prefix('portal')->name('portal.')->middleware(['auth'])->group(function (
     Route::get('/dashboard', [WorkerPortalController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [WorkerPortalController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [WorkerPortalController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/password', [WorkerPortalController::class, 'changePassword'])->name('profile.password');
     Route::get('/id-card', [WorkerPortalController::class, 'idCard'])->name('id-card');
     Route::get('/id-card/download', [WorkerPortalController::class, 'downloadIdCard'])->name('id-card.download');
     Route::get('/documents', [WorkerPortalController::class, 'documents'])->name('documents');
