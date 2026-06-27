@@ -1,339 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LGA Staff ID Card — {{ $worker->full_name }}</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            width: 85.6mm;
-            background: white;
-        }
+<meta charset="UTF-8">
+<title>ID Card — {{ $worker->full_name }}</title>
+<style>
+* { margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; }
 
-        /* ===== CARD FRONT ===== */
-        .card-front {
-            width: 85.6mm;
-            height: 53.98mm;
-            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
-            color: white;
-            padding: 5mm;
-            position: relative;
-            page-break-after: always;
-            overflow: hidden;
-        }
+/* ===================== FRONT ===================== */
+.front {
+    width: 85.6mm;
+    height: 54mm;
+    background-color: #065f46;
+    color: white;
+    overflow: hidden;
+    page-break-after: always;
+}
 
-        /* Decorative circle */
-        .card-front::before {
-            content: '';
-            position: absolute;
-            right: -10mm;
-            bottom: -10mm;
-            width: 35mm;
-            height: 35mm;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.06);
-        }
-        .card-front::after {
-            content: '';
-            position: absolute;
-            right: 5mm;
-            bottom: -5mm;
-            width: 20mm;
-            height: 20mm;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-        }
+.front-header {
+    background-color: #043927;
+    padding: 2mm 3mm 2mm 3mm;
+    border-bottom: 0.5pt solid #a7f3d0;
+}
+.front-header table { width: 100%; border-collapse: collapse; }
+.front-header td { vertical-align: middle; padding: 0; }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            border-bottom: 0.5px solid rgba(255,255,255,0.3);
-            padding-bottom: 2.5mm;
-            margin-bottom: 3mm;
-        }
-        .card-logo {
-            width: 7mm;
-            height: 7mm;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-right: 2mm;
-        }
-        .card-logo-text {
-            color: #064e3b;
-            font-size: 4pt;
-            font-weight: 900;
-        }
-        .card-title-block p {
-            color: white;
-            font-size: 5pt;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-        .card-title-block small {
-            color: rgba(167,243,208,1);
-            font-size: 4pt;
-        }
+.logo-wrap {
+    width: 8mm;
+    height: 8mm;
+    background-color: white;
+    border-radius: 4mm;
+    text-align: center;
+    line-height: 8mm;
+}
+.logo-wrap span {
+    color: #043927;
+    font-size: 4pt;
+    font-weight: bold;
+}
+.hdr-org {
+    font-size: 5.5pt;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
+}
+.hdr-sub {
+    font-size: 3.8pt;
+    color: #a7f3d0;
+    margin-top: 0.5mm;
+}
 
-        .card-body {
-            display: flex;
-            gap: 3mm;
-            align-items: flex-start;
-        }
-        .card-photo {
-            width: 16mm;
-            height: 18mm;
-            object-fit: cover;
-            border-radius: 2mm;
-            border: 1px solid rgba(255,255,255,0.4);
-            flex-shrink: 0;
-        }
-        .card-photo-placeholder {
-            width: 16mm;
-            height: 18mm;
-            background: rgba(255,255,255,0.15);
-            border-radius: 2mm;
-            border: 1px solid rgba(255,255,255,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .card-photo-placeholder span {
-            font-size: 8pt;
-            font-weight: 900;
-            color: rgba(255,255,255,0.8);
-        }
-        .card-info {
-            flex: 1;
-        }
-        .card-name {
-            font-size: 7pt;
-            font-weight: 900;
-            line-height: 1.3;
-            margin-bottom: 1mm;
-        }
-        .card-designation {
-            font-size: 5.5pt;
-            color: rgba(167,243,208,1);
-            font-weight: 600;
-            margin-bottom: 1mm;
-        }
-        .card-dept {
-            font-size: 5pt;
-            color: rgba(209,250,229,1);
-            margin-bottom: 2mm;
-        }
-        .card-staff-no {
-            font-family: 'Courier New', monospace;
-            font-size: 6pt;
-            color: rgba(209,250,229,1);
-            font-weight: 700;
-        }
+.front-body {
+    padding: 2.5mm 3mm 0 3mm;
+}
+.front-body table { width: 100%; border-collapse: collapse; }
+.front-body td { vertical-align: top; padding: 0; }
 
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 3mm;
-            padding-top: 2mm;
-            border-top: 0.5px solid rgba(255,255,255,0.2);
-            position: relative;
-            z-index: 1;
-        }
-        .card-expiry-label {
-            font-size: 4pt;
-            color: rgba(167,243,208,1);
-        }
-        .card-expiry-value {
-            font-size: 5.5pt;
-            font-weight: 700;
-        }
-        .card-qr-box {
-            width: 13mm;
-            height: 13mm;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1mm;
-        }
-        .card-qr-box img {
-            width: 12mm;
-            height: 12mm;
-        }
+.photo-cell { width: 16mm; }
+.photo-img {
+    width: 15mm;
+    height: 19mm;
+    border: 0.8pt solid rgba(255,255,255,0.5);
+}
+.photo-placeholder {
+    width: 15mm;
+    height: 19mm;
+    background-color: #047857;
+    border: 0.8pt solid rgba(255,255,255,0.4);
+    text-align: center;
+    line-height: 19mm;
+    font-size: 11pt;
+    font-weight: bold;
+    color: white;
+}
 
-        /* ===== CARD BACK ===== */
-        .card-back {
-            width: 85.6mm;
-            height: 53.98mm;
-            background: #f0fdf4;
-            border: 1.5px solid #064e3b;
-            padding: 5mm;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-back-header {
-            text-align: center;
-            border-bottom: 0.5px solid #a7f3d0;
-            padding-bottom: 2mm;
-            margin-bottom: 3mm;
-        }
-        .card-back-header p {
-            font-size: 5pt;
-            color: #064e3b;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.5pt;
-        }
-        .card-back-header small {
-            font-size: 4pt;
-            color: #047857;
-        }
-        .back-section {
-            margin-bottom: 2mm;
-        }
-        .back-label {
-            font-size: 4pt;
-            color: #6b7280;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 0.5mm;
-        }
-        .back-value {
-            font-size: 5pt;
-            color: #1f2937;
-        }
-        .back-row {
-            display: flex;
-            gap: 5mm;
-        }
-        .back-row .back-section {
-            flex: 1;
-        }
-        .card-back-footer {
-            margin-top: auto;
-            border-top: 0.5px solid #a7f3d0;
-            padding-top: 2mm;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .back-terms {
-            font-size: 3.5pt;
-            color: #6b7280;
-            flex: 1;
-            line-height: 1.4;
-            margin-right: 3mm;
-        }
-        .back-url {
-            font-size: 4pt;
-            color: #047857;
-            font-weight: 700;
-            word-break: break-all;
-            text-align: right;
-            max-width: 30mm;
-        }
-    </style>
+.info-cell { padding-left: 2.5mm; }
+.worker-name {
+    font-size: 7pt;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1.5mm;
+    line-height: 1.2;
+}
+.worker-desig {
+    font-size: 5.5pt;
+    color: #a7f3d0;
+    font-weight: bold;
+    margin-bottom: 1mm;
+}
+.worker-dept {
+    font-size: 4.8pt;
+    color: #d1fae5;
+    margin-bottom: 0.8mm;
+}
+.worker-no {
+    font-size: 5.5pt;
+    font-weight: bold;
+    color: #d1fae5;
+    font-family: 'Courier New', monospace;
+    margin-top: 1.5mm;
+    border-top: 0.5pt solid rgba(255,255,255,0.2);
+    padding-top: 1mm;
+}
+
+.front-footer {
+    padding: 1.5mm 3mm 1.5mm 3mm;
+    border-top: 0.5pt solid rgba(255,255,255,0.25);
+    background-color: #043927;
+    margin-top: 2mm;
+}
+.front-footer table { width: 100%; border-collapse: collapse; }
+.front-footer td { vertical-align: middle; padding: 0; }
+
+.expiry-label { font-size: 3.8pt; color: #a7f3d0; }
+.expiry-val { font-size: 5.5pt; font-weight: bold; color: white; margin-top: 0.5mm; }
+
+.qr-wrap {
+    width: 14mm;
+    height: 14mm;
+    background-color: white;
+    padding: 1mm;
+    float: right;
+}
+.qr-wrap img { width: 12mm; height: 12mm; }
+
+/* ===================== BACK ===================== */
+.back {
+    width: 85.6mm;
+    height: 54mm;
+    background-color: #f0fdf4;
+    overflow: hidden;
+}
+
+.back-header {
+    background-color: #064e3b;
+    color: white;
+    text-align: center;
+    padding: 2mm 3mm;
+    border-bottom: 1pt solid #065f46;
+}
+.back-org {
+    font-size: 6pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    color: white;
+}
+.back-tagline { font-size: 3.8pt; color: #a7f3d0; margin-top: 0.5mm; }
+
+.back-body { padding: 1.5mm 3mm; }
+.back-body table { width: 100%; border-collapse: collapse; }
+.back-body td { vertical-align: top; padding: 0 1mm 0 0; }
+
+.bl { font-size: 3.5pt; color: #6b7280; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5mm; }
+.bv { font-size: 4.8pt; color: #1f2937; line-height: 1.3; }
+
+.back-divider {
+    border: none;
+    border-top: 0.5pt solid #a7f3d0;
+    margin: 1.5mm 3mm;
+}
+
+.back-url-section { padding: 0 3mm; }
+.verify-label { font-size: 3.5pt; color: #6b7280; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5mm; }
+.verify-url { font-size: 4.5pt; color: #047857; font-weight: bold; }
+
+.back-footer {
+    border-top: 0.5pt solid #a7f3d0;
+    padding: 1.5mm 3mm;
+    background-color: #ecfdf5;
+    margin-top: 1.5mm;
+}
+.back-footer table { width: 100%; border-collapse: collapse; }
+.back-footer td { vertical-align: top; padding: 0; }
+.terms { font-size: 3.5pt; color: #6b7280; line-height: 1.5; }
+.contact-info { text-align: right; }
+.ci-label { font-size: 3.5pt; color: #6b7280; }
+.ci-val { font-size: 4pt; color: #064e3b; font-weight: bold; }
+</style>
 </head>
 <body>
 
-    {{-- ===== CARD FRONT ===== --}}
-    <div class="card-front">
+{{-- =================== FRONT =================== --}}
+<div class="front">
 
-        <div class="card-header">
-            <div class="card-logo">
-                <span class="card-logo-text">LGA</span>
-            </div>
-            <div class="card-title-block">
-                <p>{{ strtoupper(config('app.name')) }}</p>
-                <small>OFFICIAL STAFF IDENTITY CARD</small>
-            </div>
-        </div>
-
-        <div class="card-body">
-            @if($worker->profile_photo_url)
-                <img src="{{ $worker->profile_photo_url }}" class="card-photo" alt="{{ $worker->full_name }}">
-            @else
-                <div class="card-photo-placeholder">
-                    <span>{{ strtoupper(substr($worker->full_name, 0, 1)) }}</span>
-                </div>
-            @endif
-
-            <div class="card-info">
-                <div class="card-name">{{ strtoupper($worker->full_name) }}</div>
-                <div class="card-designation">{{ $worker->designation ?? 'LGA Staff' }}</div>
-                <div class="card-dept">{{ $worker->department?->name ?? '' }}</div>
-                @if($worker->unit?->name)
-                    <div class="card-dept">{{ $worker->unit->name }}</div>
-                @endif
-                <div class="card-staff-no">No: {{ $worker->staff_number }}</div>
-            </div>
-        </div>
-
-        <div class="card-footer">
-            <div>
-                <div class="card-expiry-label">EXPIRES</div>
-                <div class="card-expiry-value">
-                    {{ $worker->id_expiry_date ? $worker->id_expiry_date->format('M Y') : 'N/A' }}
-                </div>
-            </div>
-            <div class="card-qr-box">
-                @if($qrCode ?? false)
-                    {!! $qrCode !!}
-                @else
-                    <span style="font-size:4pt;color:#064e3b;font-weight:900;">QR</span>
-                @endif
-            </div>
-        </div>
-
+    <div class="front-header">
+        <table>
+            <tr>
+                <td style="width: 10mm;">
+                    <div class="logo-wrap"><span>LGA</span></div>
+                </td>
+                <td>
+                    <div class="hdr-org">{{ strtoupper(config('lga.name', 'Alimosho LGA')) }}</div>
+                    <div class="hdr-sub">Official Staff Identity Card</div>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    {{-- ===== CARD BACK ===== --}}
-    <div class="card-back">
-
-        <div class="card-back-header">
-            <p>{{ strtoupper(config('app.name')) }}</p>
-            <small>If found, please return to the LGA Secretariat</small>
-        </div>
-
-        <div class="back-row">
-            <div class="back-section">
-                <div class="back-label">Emergency Contact</div>
-                <div class="back-value">{{ $worker->emergency_contact_name ?? $worker->next_of_kin_name ?? 'N/A' }}</div>
-                <div class="back-value">{{ $worker->emergency_contact_phone ?? $worker->next_of_kin_phone ?? '' }}</div>
-            </div>
-            <div class="back-section">
-                <div class="back-label">Blood Group</div>
-                <div class="back-value">{{ $worker->blood_group ?? 'N/A' }}</div>
-            </div>
-        </div>
-
-        <div class="back-section" style="margin-top:2mm;">
-            <div class="back-label">Verification URL</div>
-            <div class="back-value" style="font-family: monospace; font-size:4.5pt; color:#047857;">
-                {{ route('verify.show', $worker->verification_code) }}
-            </div>
-        </div>
-
-        <div class="card-back-footer">
-            <div class="back-terms">
-                This card is the property of {{ config('app.name') }}. Misuse is an offence. 
-                Report lost cards immediately to the LGA Secretariat.
-            </div>
-            <div class="back-url">
-                <div style="font-size:3.5pt; color:#6b7280; margin-bottom:1mm;">Hotline</div>
-                <div>{{ config('lga.phone', 'N/A') }}</div>
-                <div style="margin-top:1mm; font-size:3.5pt; color:#6b7280;">Website</div>
-                <div style="font-size:4pt;">{{ str_replace(['https://', 'http://'], '', url('/')) }}</div>
-            </div>
-        </div>
-
+    <div class="front-body">
+        <table>
+            <tr>
+                <td class="photo-cell">
+                    @php
+                        $photoPath = $worker->hasMedia('profile_photo')
+                            ? $worker->getFirstMediaPath('profile_photo')
+                            : null;
+                    @endphp
+                    @if($photoPath && file_exists($photoPath))
+                        <img src="{{ $photoPath }}" class="photo-img" alt="">
+                    @else
+                        <div class="photo-placeholder">{{ strtoupper(substr($worker->surname, 0, 1)) }}</div>
+                    @endif
+                </td>
+                <td class="info-cell">
+                    <div class="worker-name">{{ strtoupper($worker->full_name) }}</div>
+                    <div class="worker-desig">{{ $worker->designation }}</div>
+                    @if($worker->department?->name)
+                        <div class="worker-dept">{{ $worker->department->name }}</div>
+                    @endif
+                    @if($worker->unit?->name)
+                        <div class="worker-dept">{{ $worker->unit->name }}</div>
+                    @endif
+                    <div class="worker-no">No: {{ $worker->staff_number }}</div>
+                </td>
+            </tr>
+        </table>
     </div>
+
+    <div class="front-footer">
+        <table>
+            <tr>
+                <td>
+                    <div class="expiry-label">EXPIRES</div>
+                    <div class="expiry-val">
+                        {{ $worker->id_expiry_date ? $worker->id_expiry_date->format('M Y') : 'N/A' }}
+                    </div>
+                </td>
+                <td style="text-align: right; width: 16mm;">
+                    @if(!empty($qrCode))
+                        <div class="qr-wrap">
+                            <img src="data:image/png;base64,{{ $qrCode }}" alt="QR">
+                        </div>
+                    @endif
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+{{-- =================== BACK =================== --}}
+<div class="back">
+
+    <div class="back-header">
+        <div class="back-org">{{ strtoupper(config('lga.name', 'Alimosho LGA')) }}</div>
+        <div class="back-tagline">If found, please return to the LGA Secretariat</div>
+    </div>
+
+    <div class="back-body">
+        <table>
+            <tr>
+                <td style="width: 45%;">
+                    <div class="bl">Emergency Contact</div>
+                    <div class="bv">{{ $worker->emergency_contact_name ?? $worker->next_of_kin_name ?? 'N/A' }}</div>
+                    <div class="bv">{{ $worker->emergency_contact_phone ?? $worker->next_of_kin_phone ?? '' }}</div>
+                </td>
+                <td style="width: 25%;">
+                    <div class="bl">Blood Group</div>
+                    <div class="bv">{{ $worker->blood_group ?? 'N/A' }}</div>
+                </td>
+                <td style="width: 30%;">
+                    <div class="bl">Gender</div>
+                    <div class="bv">{{ ucfirst($worker->gender?->value ?? 'N/A') }}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr class="back-divider">
+
+    <div class="back-url-section">
+        <div class="verify-label">Verification URL</div>
+        <div class="verify-url">{{ route('verify.show', $worker->verification_code) }}</div>
+    </div>
+
+    <div class="back-footer">
+        <table>
+            <tr>
+                <td style="width: 65%;">
+                    <div class="terms">
+                        This card is the property of {{ config('lga.name', 'Alimosho LGA') }}.
+                        Misuse is an offence. Report lost cards immediately to the LGA Secretariat.
+                    </div>
+                </td>
+                <td class="contact-info" style="width: 35%;">
+                    @if(config('lga.phone'))
+                        <div class="ci-label">Hotline</div>
+                        <div class="ci-val">{{ config('lga.phone') }}</div>
+                    @endif
+                    <div class="ci-label" style="margin-top: 1mm;">Website</div>
+                    <div class="ci-val" style="font-size:3.5pt;">{{ str_replace(['https://', 'http://'], '', url('/')) }}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 
 </body>
 </html>
