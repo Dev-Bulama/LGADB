@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             UserSeeder::class,
             WorkerSeeder::class,
+            WorkerPhotoSeeder::class,
             ContentSeeder::class,
         ]);
     }
