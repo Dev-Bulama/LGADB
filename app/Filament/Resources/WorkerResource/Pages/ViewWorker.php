@@ -70,6 +70,7 @@ class ViewWorker extends ViewRecord
                         (new IdCardService())->generate($this->record);
                         Notification::make()
                             ->title('ID Card Generated')
+                            ->body('ID card PDF saved. Use "Download ID Card" to retrieve it.')
                             ->success()
                             ->send();
                     } catch (\Throwable $e) {
@@ -79,7 +80,16 @@ class ViewWorker extends ViewRecord
                             ->danger()
                             ->send();
                     }
-                }),
+                })
+                ->visible(fn () => $this->record->verification_status === VerificationStatus::Approved),
+
+            Actions\Action::make('download_id')
+                ->label('Download ID Card')
+                ->icon('heroicon-o-arrow-down-tray')
+                ->color('gray')
+                ->url(fn () => route('admin.workers.id-card.download', $this->record))
+                ->openUrlInNewTab()
+                ->visible(fn () => $this->record->id_card_generated_at !== null),
 
             Actions\DeleteAction::make(),
         ];

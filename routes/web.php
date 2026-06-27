@@ -36,5 +36,11 @@ Route::prefix('portal')->name('portal.')->middleware(['auth'])->group(function (
     Route::get('/history', [WorkerPortalController::class, 'history'])->name('history');
 });
 
+// Admin ID card download (Filament admin area, auth guarded)
+Route::get('/admin/workers/{worker}/id-card/download', function (\App\Models\Worker $worker) {
+    abort_unless(auth()->check() && auth()->user()->hasAnyRole(['super_admin', 'hr_officer']), 403);
+    return (new \App\Services\IdCardService())->download($worker);
+})->name('admin.workers.id-card.download')->middleware(['auth']);
+
 // Auth routes (Laravel default)
 require __DIR__.'/auth.php';
