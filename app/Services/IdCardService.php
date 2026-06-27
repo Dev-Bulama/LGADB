@@ -8,11 +8,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IdCardService
 {
-    // CR80 card: 85.6mm × 54mm. Two pages (front + back) → total height 108mm.
-    // In points at 72dpi: 85.6mm = 242.65pt, 54mm = 153.07pt per page.
-    // We set paper to hold both pages stacked: height = 153.07 × 2 = 306.14pt.
-    // DomPDF page-break-after: always splits them cleanly.
-    private const PAPER = [0, 0, 242.65, 306.14];
+    // CR80 card: 85.6mm × 54mm = 242.65pt × 153.07pt (at 72dpi).
+    // We set DomPDF DPI to 72 so mm-in-CSS matches the pt-based paper exactly.
+    private const W = 242.65; // pt
+    private const H = 153.07; // pt
 
     private function buildPdf(Worker $worker): array
     {
@@ -31,12 +30,13 @@ class IdCardService
             'template' => $template,
         ]);
 
-        $pdf->setPaper(self::PAPER);
-
-        // Allow local file access for profile photos
-        $pdf->getDomPDF()->set_option('isRemoteEnabled', false);
+        // DPI = 72 ensures 1mm in CSS = (72/25.4)pt, which matches the pt paper exactly
+        $pdf->getDomPDF()->set_option('dpi', 72);
         $pdf->getDomPDF()->set_option('isLocalEnabled', true);
-        $pdf->getDomPDF()->set_option('chroot', storage_path());
+        $pdf->getDomPDF()->set_option('isRemoteEnabled', false);
+
+        // Each PDF page = one CR80 card side; page-break-after:always creates page 2
+        $pdf->setPaper([0, 0, self::W, self::H]);
 
         $safeNumber = str_replace('/', '-', $worker->staff_number);
 
