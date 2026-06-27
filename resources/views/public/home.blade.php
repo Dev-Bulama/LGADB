@@ -6,78 +6,158 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="gov-gradient text-white py-20 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
+<section class="gov-gradient text-white relative overflow-hidden" x-data="homeSearch()">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
         <div class="absolute top-10 left-10 w-40 h-40 rounded-full bg-white"></div>
         <div class="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-white"></div>
         <div class="absolute top-1/2 left-1/3 w-20 h-20 rounded-full bg-white"></div>
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center bg-green-700 bg-opacity-60 text-green-100 text-xs font-semibold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
-                    Official Government System
-                </div>
-                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-4">
-                    Workforce Identity &amp;<br>
-                    <span class="text-green-200">Verification System</span>
-                </h1>
-                <p class="text-green-100 text-lg leading-relaxed mb-8">
-                    The official platform for verifying LGA workforce identities, managing staff records, and ensuring transparency in local government operations.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('verify.index') }}"
-                       class="inline-flex items-center justify-center bg-white text-green-800 font-bold px-6 py-3 rounded-lg hover:bg-green-50 transition shadow-lg">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
-                        Verify a Staff Member
-                    </a>
-                    <a href="{{ route('login') }}"
-                       class="inline-flex items-center justify-center border-2 border-white text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                        Worker Login
-                    </a>
-                </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative text-center">
+
+        <!-- Badge -->
+        <div class="inline-flex items-center bg-green-700 bg-opacity-60 text-green-100 text-xs font-semibold px-3 py-1 rounded-full mb-5 uppercase tracking-wide">
+            Official Government System
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-3">
+            Workforce Identity &amp;<br>
+            <span class="text-green-200">Verification System</span>
+        </h1>
+        <p class="text-green-100 text-base sm:text-lg mb-10 max-w-2xl mx-auto">
+            The official platform for verifying {{ $appSettings['lga_name'] ?? 'LGA' }} workforce identities and authenticating staff records.
+        </p>
+
+        <!-- Google-style search bar -->
+        <form action="{{ route('verify.search') }}" method="POST" class="w-full max-w-2xl mx-auto">
+            @csrf
+            <input type="hidden" name="type" x-model="selectedType">
+
+            <div class="relative flex items-center bg-white rounded-full shadow-2xl px-5 py-3.5">
+                <!-- Search icon -->
+                <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+
+                <!-- Input -->
+                <input
+                    type="text"
+                    name="query"
+                    id="home-query"
+                    required
+                    minlength="2"
+                    maxlength="200"
+                    autocomplete="off"
+                    x-model="query"
+                    @input="autoDetect()"
+                    placeholder="Search by name, staff number, code, email, phone or NIN…"
+                    class="flex-1 mx-3 text-base text-gray-700 placeholder-gray-400 bg-transparent focus:outline-none"
+                />
+
+                <!-- Type badge -->
+                <span
+                    x-show="query.length >= 2"
+                    x-cloak
+                    x-text="typeLabel"
+                    class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 flex-shrink-0 mr-2"
+                ></span>
+
+                <!-- Clear -->
+                <button
+                    type="button"
+                    x-show="query.length > 0"
+                    x-cloak
+                    @click="query = ''; selectedType = ''; $nextTick(() => document.getElementById('home-query').focus())"
+                    class="text-gray-400 hover:text-gray-600 flex-shrink-0 mr-2"
+                    aria-label="Clear"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <span class="border-l border-gray-300 h-5 mx-1"></span>
+
+                <!-- Submit -->
+                <button type="submit" class="ml-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-5 py-2 rounded-full transition flex-shrink-0">
+                    Search
+                </button>
             </div>
 
-            <!-- Quick Verify Form -->
-            <div class="bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 rounded-2xl p-6">
-                <h2 class="text-white font-bold text-xl mb-4 flex items-center">
-                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
-                    Quick Staff Verification
-                </h2>
-                <form action="{{ route('verify.search') }}" method="POST" class="space-y-3">
-                    @csrf
-                    <div>
-                        <label class="block text-green-100 text-sm font-medium mb-1">Search By</label>
-                        <select name="type"
-                                class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 text-white rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-white placeholder-green-200">
-                            <option value="staff_number" class="text-gray-800">Staff Number</option>
-                            <option value="verification_code" class="text-gray-800">Verification Code</option>
-                            <option value="surname" class="text-gray-800">Surname</option>
-                            <option value="full_name" class="text-gray-800">Full Name</option>
-                            <option value="phone" class="text-gray-800">Phone Number</option>
-                            <option value="email" class="text-gray-800">Email Address</option>
-                            <option value="national_id" class="text-gray-800">National ID (NIN)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-green-100 text-sm font-medium mb-1">Search Query</label>
-                        <input type="text" name="query" required minlength="2"
-                               placeholder="Enter staff number, name, etc."
-                               class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-green-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-white">
-                    </div>
-                    <button type="submit"
-                            class="w-full bg-white text-green-800 font-bold py-2.5 rounded-lg hover:bg-green-50 transition text-sm">
-                        Search Staff Records
-                    </button>
-                </form>
+            <!-- Type chips -->
+            <div class="flex flex-wrap gap-2 justify-center mt-4">
+                <template x-for="chip in typeChips" :key="chip.value">
+                    <button
+                        type="button"
+                        @click="selectedType = (selectedType === chip.value ? '' : chip.value)"
+                        :class="selectedType === chip.value
+                            ? 'bg-white text-green-800 border-white'
+                            : 'bg-transparent text-green-200 border-green-500 hover:border-white hover:text-white'"
+                        class="px-3 py-1 rounded-full border text-xs font-medium transition"
+                        x-text="chip.label"
+                    ></button>
+                </template>
             </div>
+        </form>
+
+        <!-- CTA links below search -->
+        <div class="flex items-center justify-center gap-6 mt-8 text-sm">
+            <a href="{{ route('verify.index') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
+                Advanced Search
+            </a>
+            <span class="text-green-600">|</span>
+            <a href="{{ route('login') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
+                Worker Login
+            </a>
+            @auth
+            <span class="text-green-600">|</span>
+            <a href="{{ route('portal.dashboard') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
+                My Portal
+            </a>
+            @endauth
         </div>
     </div>
 </section>
+
+<script>
+function homeSearch() {
+    return {
+        query: '',
+        selectedType: '',
+        typeChips: [
+            { value: 'staff_number',      label: 'Staff No.' },
+            { value: 'verification_code', label: 'Verif. Code' },
+            { value: 'surname',           label: 'Surname' },
+            { value: 'full_name',         label: 'Full Name' },
+            { value: 'email',             label: 'Email' },
+            { value: 'phone',             label: 'Phone' },
+            { value: 'national_id',       label: 'NIN' },
+        ],
+        get typeLabel() {
+            if (this.selectedType) {
+                const chip = this.typeChips.find(c => c.value === this.selectedType);
+                return (chip ? chip.label : this.selectedType) + ' ✓';
+            }
+            const detected = this.detectType(this.query);
+            const chip = this.typeChips.find(c => c.value === detected);
+            return chip ? chip.label : detected;
+        },
+        autoDetect() {},
+        detectType(q) {
+            q = q.trim();
+            if (!q) return 'auto';
+            if (/^[A-Za-z]{2,5}\/\d{4}\/\d{4,6}$/.test(q)) return 'staff_number';
+            if (/^[A-Za-z0-9]{10}$/.test(q) && !q.includes(' ')) return 'verification_code';
+            if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q)) return 'email';
+            if (/^[\+]?[\d\s\-]{7,15}$/.test(q)) return 'phone';
+            if (/^\d{11}$/.test(q)) return 'national_id';
+            if (!q.includes(' ')) return 'surname';
+            return 'full_name';
+        },
+    }
+}
+</script>
 
 <!-- Stats Section -->
 <section class="bg-white py-12 border-b border-gray-100">

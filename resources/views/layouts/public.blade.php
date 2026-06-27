@@ -17,7 +17,7 @@
 
     <!-- Top stripe -->
     <div class="bg-green-900 text-green-200 text-xs py-1 text-center">
-        Official Website of the Local Government Authority — Nigeria
+        Official Website of {{ $appSettings['lga_name'] ?? 'the Local Government Authority' }} — {{ $appSettings['lga_state'] ?? 'Nigeria' }}
     </div>
 
     <!-- Navigation -->
