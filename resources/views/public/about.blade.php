@@ -1,0 +1,68 @@
+@extends('layouts.public')
+
+@section('title', 'About')
+@section('description', 'About the LGA Workforce Identity & Verification Management System.')
+
+@section('content')
+
+<div class="gov-gradient py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">About This System</h1>
+        <p class="text-green-100 text-lg">Learn about the LGA Workforce Identity &amp; Verification Management System.</p>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    @if($page && $page->content)
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10">
+            <div class="prose prose-green max-w-none text-gray-700 leading-relaxed">
+                {!! $page->content !!}
+            </div>
+        </div>
+    @else
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">About the LGA Workforce Identity System</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    The Local Government Authority (LGA) Workforce Identity &amp; Verification Management System is the official digital platform
+                    for managing, verifying, and authenticating the identities of all LGA workforce members. This system was developed to
+                    enhance transparency, accountability, and efficiency in local government workforce management across Nigeria.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">Our Mission</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    To provide a reliable, secure, and accessible platform for verifying the identity of LGA workforce members, reducing
+                    instances of ghost workers, improving payroll integrity, and ensuring that all staff records are accurate and up-to-date.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">Key Features</h3>
+                <ul class="space-y-2 text-gray-600 text-sm">
+                    <li class="flex items-start space-x-2">
+                        <span class="text-green-600 mt-0.5">✓</span>
+                        <span>Real-time staff verification using multiple search criteria</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <span class="text-green-600 mt-0.5">✓</span>
+                        <span>QR-code enabled digital ID cards for quick on-the-spot verification</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <span class="text-green-600 mt-0.5">✓</span>
+                        <span>Worker self-service portal for profile management and document access</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <span class="text-green-600 mt-0.5">✓</span>
+                        <span>Comprehensive audit trails for all verification activities</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                        <span class="text-green-600 mt-0.5">✓</span>
+                        <span>Department and unit management with hierarchical reporting</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    @endif
+</div>
+
+@endsection
