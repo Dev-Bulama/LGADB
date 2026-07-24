@@ -24,7 +24,7 @@ class SettingSeeder extends Seeder
             ['key' => 'id_card_issuer',          'value' => 'LGA Chairman, Alimosho LGA', 'group' => 'id_card', 'description' => 'Issuing authority name on the ID card'],
 
             // Verification
-            ['key' => 'verification_public_message', 'value' => 'This verification portal allows the public to confirm the employment status of Alimosho LGA staff. Enter a staff number, verification code, or other identifier to verify.', 'group' => 'verification', 'description' => 'Introductory text on the public verification page'],
+            ['key' => 'verification_public_message', 'value' => 'This portal allows the public to verify the identity and residency status of any registered citizen or resident of Alimosho LGA. Enter a Citizen ID, full name, NIN, phone number, or verification code to verify.', 'group' => 'verification', 'description' => 'Introductory text on the public verification page'],
             ['key' => 'verification_footer_note',    'value' => 'For fraud concerns, call our fraud hotline or visit the LGA Secretariat.', 'group' => 'verification', 'description' => 'Footer note on verification result pages'],
 
             // Mail

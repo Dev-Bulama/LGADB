@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Verification — {{ $appSettings['org_name'] ?? config('app.name') }}</title>
-    <meta name="description" content="Verify the identity of any LGA workforce member using their staff number, name, verification code, email, phone, or NIN.">
+    <title>Citizen Verification — {{ $appSettings['org_name'] ?? config('app.name') }}</title>
+    <meta name="description" content="Verify the identity of any LGA workforce member using their Citizen ID, name, verification code, email, phone, or NIN.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -46,7 +46,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
             </div>
-            <h1 class="text-3xl font-normal text-gray-800">Staff Verification</h1>
+            <h1 class="text-3xl font-normal text-gray-800">Citizen Verification</h1>
             <p class="text-gray-500 text-sm mt-1">{{ $appSettings['org_name'] ?? config('app.name') }}</p>
         </div>
 
@@ -84,7 +84,7 @@
                     autocomplete="off"
                     x-model="query"
                     @input="autoDetect()"
-                    placeholder="Search by name, staff number, code, email, phone or NIN…"
+                    placeholder="Search by name, Citizen ID, code, email, phone or NIN…"
                     class="flex-1 mx-3 text-base text-gray-700 placeholder-gray-400 bg-transparent focus:outline-none"
                 />
 
@@ -139,7 +139,7 @@
         <div class="flex flex-wrap gap-3 justify-center mt-10 text-xs text-gray-500">
             <span class="flex items-center gap-1">
                 <svg class="w-3.5 h-3.5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                Verified staff only
+                Verified citizens only
             </span>
             <span class="flex items-center gap-1">
                 <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
@@ -156,7 +156,7 @@
         </div>
 
         <p class="text-xs text-gray-400 mt-4 text-center max-w-sm">
-            {{ $appSettings['verification_public_message'] ?? 'Enter any identifier to verify an LGA staff member. Only officially approved records are returned.' }}
+            {{ $appSettings['verification_public_message'] ?? 'Enter any identifier to verify an LGA citizen or resident. Only officially approved records are returned.' }}
         </p>
     </main>
 
@@ -179,7 +179,7 @@ function verifyApp() {
         query: '',
         selectedType: '',
         typeChips: [
-            { value: 'staff_number',      label: 'Staff No.' },
+            { value: 'staff_number',      label: 'Citizen ID' },
             { value: 'verification_code', label: 'Verif. Code' },
             { value: 'surname',           label: 'Surname' },
             { value: 'full_name',         label: 'Full Name' },

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Contact Us')
-@section('description', 'Get in touch with the LGA Workforce Identity & Verification System team.')
+@section('description', 'Get in touch with the Alimosho LGA Citizen Identity & Verification Platform team.')
 
 @section('content')
 
@@ -102,7 +102,7 @@
                         <select name="subject"
                                 class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             <option value="">Select a subject</option>
-                            <option value="verification">Staff Verification Enquiry</option>
+                            <option value="verification">Citizen Verification Enquiry</option>
                             <option value="id_card">ID Card Issue</option>
                             <option value="portal">Worker Portal Access</option>
                             <option value="fraud">Report Fraudulent ID</option>

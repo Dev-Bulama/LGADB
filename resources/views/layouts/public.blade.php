@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', config('app.name')) — LGA Workforce Identity System</title>
-    <meta name="description" content="@yield('description', 'Official LGA Workforce Identity & Verification Management System')">
+    <title>@yield('title', config('app.name')) — Alimosho Citizen Identity & Verification Platform</title>
+    <meta name="description" content="@yield('description', 'Official Alimosho LGA Citizen Identity & Verification Database Platform')">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="hidden sm:block">
                             <div class="text-white font-bold text-sm leading-tight">{{ $appSettings['org_name'] ?? config('app.name') }}</div>
-                            <div class="text-green-200 text-xs">Workforce Identity System</div>
+                            <div class="text-green-200 text-xs">Citizen Identity & Verification Platform</div>
                         </div>
                     </a>
                 </div>
@@ -45,7 +45,7 @@
                     </a>
                     <a href="{{ route('verify.index') }}"
                        class="text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition {{ request()->routeIs('verify.*') ? 'bg-green-700 text-white' : '' }}">
-                        Verify Staff
+                        Verify Citizen
                     </a>
                     <a href="{{ route('news') }}"
                        class="text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition {{ request()->routeIs('news*') ? 'bg-green-700 text-white' : '' }}">
@@ -92,7 +92,7 @@
             <!-- Mobile menu -->
             <div x-show="open" x-cloak class="md:hidden pb-4 border-t border-green-700 pt-3 space-y-1">
                 <a href="{{ route('home') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                <a href="{{ route('verify.index') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Verify Staff</a>
+                <a href="{{ route('verify.index') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Verify Citizen</a>
                 <a href="{{ route('news') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">News</a>
                 <a href="{{ route('faqs') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">FAQs</a>
                 <a href="{{ route('contact') }}" class="block text-green-100 hover:text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
@@ -146,13 +146,13 @@
                         <h3 class="text-white font-bold text-lg">{{ config('app.name') }}</h3>
                     </div>
                     <p class="text-green-200 text-sm leading-relaxed">
-                        Official Workforce Identity &amp; Verification Management System for the Local Government Authority of Nigeria.
+                        Official Citizen Identity &amp; Verification Database Platform for Alimosho Local Government Authority, Lagos State, Nigeria.
                     </p>
                 </div>
                 <div>
                     <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('verify.index') }}" class="text-green-200 hover:text-white transition">→ Verify Staff</a></li>
+                        <li><a href="{{ route('verify.index') }}" class="text-green-200 hover:text-white transition">→ Verify Citizen</a></li>
                         <li><a href="{{ route('news') }}" class="text-green-200 hover:text-white transition">→ News &amp; Updates</a></li>
                         <li><a href="{{ route('faqs') }}" class="text-green-200 hover:text-white transition">→ FAQs</a></li>
                         <li><a href="{{ route('contact') }}" class="text-green-200 hover:text-white transition">→ Contact Us</a></li>

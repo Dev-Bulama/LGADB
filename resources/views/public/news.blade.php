@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'News & Announcements')
-@section('description', 'Latest news and announcements from the LGA Workforce Identity System.')
+@section('description', 'Latest news and announcements from Alimosho LGA Citizen Identity & Verification Platform.')
 
 @section('content')
 

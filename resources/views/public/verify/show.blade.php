@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Verified Staff — ' . $worker->full_name)
+@section('title', 'Verified Citizen — ' . $worker->full_name)
 
 @section('content')
 
@@ -10,10 +10,10 @@
             <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            Verified Staff Record
+            Verified Citizen Record
         </span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-white">{{ $worker->full_name }}</h1>
-        <p class="text-green-200 mt-2">{{ $worker->designation ?? 'LGA Staff Member' }}</p>
+        <p class="text-green-200 mt-2">{{ $worker->designation ?? 'Alimosho LGA Registered Citizen' }}</p>
     </div>
 </div>
 
@@ -26,7 +26,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
-                OFFICIAL WORKFORCE IDENTITY RECORD
+                OFFICIAL CITIZEN IDENTITY RECORD
             </span>
             <span class="bg-green-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full">APPROVED</span>
         </div>
@@ -58,48 +58,38 @@
                         <p class="text-gray-900 font-bold text-lg">{{ $worker->full_name }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Staff Number</span>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Citizen ID</span>
                         <p class="text-gray-900 font-mono font-bold">{{ $worker->staff_number }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Designation</span>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Occupation / Role</span>
                         <p class="text-gray-800">{{ $worker->designation ?? 'N/A' }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Department</span>
-                        <p class="text-gray-800">{{ $worker->department?->name ?? 'N/A' }}</p>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Ward</span>
+                        <p class="text-gray-800">{{ $worker->ward?->name ?? 'N/A' }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Unit</span>
-                        <p class="text-gray-800">{{ $worker->unit?->name ?? 'N/A' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Office</span>
-                        <p class="text-gray-800">{{ $worker->office?->name ?? 'N/A' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Grade Level / Step</span>
-                        <p class="text-gray-800">{{ $worker->grade_level ?? 'N/A' }}{{ $worker->step ? ' / Step ' . $worker->step : '' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Employment Type</span>
-                        <p class="text-gray-800">{{ $worker->employment_type?->label() ?? 'N/A' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Employment Date</span>
-                        <p class="text-gray-800">{{ optional($worker->employment_date)->format('d M Y') ?? 'N/A' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">Verified On</span>
-                        <p class="text-gray-800">{{ optional($worker->verified_at)->format('d M Y') ?? 'N/A' }}</p>
-                    </div>
-                    <div>
-                        <span class="text-xs text-gray-400 uppercase font-semibold">LGA</span>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">LGA of Residence</span>
                         <p class="text-gray-800">{{ $worker->lga?->name ?? 'N/A' }}</p>
                     </div>
                     <div>
                         <span class="text-xs text-gray-400 uppercase font-semibold">State</span>
                         <p class="text-gray-800">{{ $worker->state?->name ?? 'N/A' }}</p>
+                    </div>
+                    @if($worker->residential_address)
+                    <div class="sm:col-span-2">
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Residential Address</span>
+                        <p class="text-gray-800">{{ $worker->residential_address }}</p>
+                    </div>
+                    @endif
+                    <div>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Blood Group</span>
+                        <p class="text-gray-800">{{ $worker->blood_group ?? 'N/A' }}</p>
+                    </div>
+                    <div>
+                        <span class="text-xs text-gray-400 uppercase font-semibold">Registered On</span>
+                        <p class="text-gray-800">{{ optional($worker->verified_at)->format('d M Y') ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +98,7 @@
             <div class="mt-6 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div class="flex items-center space-x-2">
                     <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-sm text-gray-600">This record is <strong class="text-green-700">active and verified</strong> in the LGA Workforce Identity System.</span>
+                    <span class="text-sm text-gray-600">This record is <strong class="text-green-700">active and verified</strong> in the Alimosho LGA Citizen Identity & Verification Platform.</span>
                 </div>
                 <p class="text-xs text-gray-400">Verified on {{ optional($worker->verified_at)->format('d M Y \a\t H:i') }}</p>
             </div>

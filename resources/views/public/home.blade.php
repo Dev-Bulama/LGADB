@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Home')
-@section('description', 'Official LGA Workforce Identity & Verification Management System — verify staff, access worker portal.')
+@section('description', 'Official Alimosho LGA Citizen Identity & Verification Database Platform — verify citizens, access your portal.')
 
 @section('content')
 
@@ -22,11 +22,11 @@
 
         <!-- Title -->
         <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-3">
-            Workforce Identity &amp;<br>
-            <span class="text-green-200">Verification System</span>
+            Citizen Identity &amp;<br>
+            <span class="text-green-200">Verification Platform</span>
         </h1>
         <p class="text-green-100 text-base sm:text-lg mb-10 max-w-2xl mx-auto">
-            The official platform for verifying {{ $appSettings['lga_name'] ?? 'LGA' }} workforce identities and authenticating staff records.
+            The official platform for registering, verifying, and authenticating the identity of every citizen and resident of {{ $appSettings['lga_name'] ?? 'Alimosho LGA' }}.
         </p>
 
         <!-- Google-style search bar -->
@@ -51,7 +51,7 @@
                     autocomplete="off"
                     x-model="query"
                     @input="autoDetect()"
-                    placeholder="Search by name, staff number, code, email, phone or NIN…"
+                    placeholder="Search by name, Citizen ID, NIN, email, phone or verification code…"
                     class="flex-1 mx-3 text-base text-gray-700 placeholder-gray-400 bg-transparent focus:outline-none"
                 />
 
@@ -108,7 +108,7 @@
             </a>
             <span class="text-green-500">|</span>
             <a href="{{ route('register') }}" class="bg-white text-green-800 font-semibold px-4 py-1.5 rounded-full hover:bg-green-50 transition shadow">
-                Register as Staff
+                Register as Citizen
             </a>
             <span class="text-green-500">|</span>
             @auth
@@ -117,7 +117,7 @@
                 </a>
             @else
                 <a href="{{ route('login') }}" class="text-green-200 hover:text-white transition underline underline-offset-2">
-                    Worker Login
+                    Citizen Login
                 </a>
             @endauth
         </div>
@@ -130,7 +130,7 @@ function homeSearch() {
         query: '',
         selectedType: '',
         typeChips: [
-            { value: 'staff_number',      label: 'Staff No.' },
+            { value: 'staff_number',      label: 'Citizen ID' },
             { value: 'verification_code', label: 'Verif. Code' },
             { value: 'surname',           label: 'Surname' },
             { value: 'full_name',         label: 'Full Name' },
@@ -169,7 +169,7 @@ function homeSearch() {
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div class="p-4">
                 <div class="text-3xl font-extrabold text-green-700 mb-1">{{ \App\Models\Worker::verified()->count() }}</div>
-                <div class="text-gray-500 text-sm font-medium">Verified Staff</div>
+                <div class="text-gray-500 text-sm font-medium">Verified Citizens</div>
             </div>
             <div class="p-4">
                 <div class="text-3xl font-extrabold text-green-700 mb-1">{{ \App\Models\Department::count() }}</div>
@@ -177,7 +177,7 @@ function homeSearch() {
             </div>
             <div class="p-4">
                 <div class="text-3xl font-extrabold text-green-700 mb-1">{{ \App\Models\Worker::count() }}</div>
-                <div class="text-gray-500 text-sm font-medium">Total Workers</div>
+                <div class="text-gray-500 text-sm font-medium">Total Registered</div>
             </div>
             <div class="p-4">
                 <div class="text-3xl font-extrabold text-green-700 mb-1">{{ \App\Models\VerificationLog::count() }}</div>
@@ -192,7 +192,7 @@ function homeSearch() {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-extrabold text-gray-900 mb-3">System Features</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">A comprehensive digital platform to manage, verify, and authenticate Local Government workforce identities.</p>
+            <p class="text-gray-500 max-w-2xl mx-auto">A comprehensive digital platform to register, manage, verify and authenticate the identity of every citizen and resident of Alimosho LGA.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Feature 1 -->
@@ -202,8 +202,8 @@ function homeSearch() {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
                 </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Staff Verification</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Instantly verify any LGA staff member by staff number, name, NIN, or unique verification code. Get real-time status updates.</p>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Citizen Verification</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Instantly verify any Alimosho LGA citizen or resident by Citizen ID, full name, NIN, phone, or verification code. Get real-time results.</p>
                 <a href="{{ route('verify.index') }}" class="inline-block mt-4 text-green-700 font-semibold text-sm hover:underline">Verify Now →</a>
             </div>
 
@@ -215,7 +215,7 @@ function homeSearch() {
                     </svg>
                 </div>
                 <h3 class="text-lg font-bold text-gray-900 mb-2">Digital ID Cards</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Workers can download their official digital ID cards with QR code for instant verification. ID cards are issued after approval.</p>
+                <p class="text-gray-500 text-sm leading-relaxed">Citizens can download their official digital Resident ID cards with a unique QR code for instant on-the-spot verification.</p>
                 <a href="{{ route('login') }}" class="inline-block mt-4 text-green-700 font-semibold text-sm hover:underline">Access Portal →</a>
             </div>
 
@@ -227,7 +227,7 @@ function homeSearch() {
                     </svg>
                 </div>
                 <h3 class="text-lg font-bold text-gray-900 mb-2">Transparent Records</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Full employment history, department assignments, and document management in one secure system.</p>
+                <p class="text-gray-500 text-sm leading-relaxed">Complete, verified citizen records — addresses, household data, and identity documents — all in one secure, auditable system.</p>
                 <a href="{{ route('about') }}" class="inline-block mt-4 text-green-700 font-semibold text-sm hover:underline">Learn More →</a>
             </div>
         </div>
@@ -241,7 +241,7 @@ function homeSearch() {
         <div class="flex items-center justify-between mb-10">
             <div>
                 <h2 class="text-3xl font-extrabold text-gray-900 mb-1">Latest News &amp; Announcements</h2>
-                <p class="text-gray-500">Stay up to date with LGA workforce updates.</p>
+                <p class="text-gray-500">Stay up to date with LGA citizen services and announcements.</p>
             </div>
             <a href="{{ route('news') }}" class="hidden sm:inline-flex items-center text-green-700 font-semibold hover:underline">
                 View All News →

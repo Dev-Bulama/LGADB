@@ -160,7 +160,7 @@ body {
                 </td>
                 <td>
                     <div class="hdr-org">{{ strtoupper(config('lga.name', 'Alimosho LGA')) }}</div>
-                    <div class="hdr-sub">Official Staff Identity Card</div>
+                    <div class="hdr-sub">Official Resident Identity Card</div>
                 </td>
             </tr>
         </table>
@@ -183,14 +183,18 @@ body {
                 </td>
                 <td class="info-td">
                     <div class="w-name">{{ strtoupper($worker->full_name) }}</div>
-                    <div class="w-desig">{{ $worker->designation }}</div>
-                    @if($worker->department?->name)
-                        <div class="w-dept">{{ $worker->department->name }}</div>
+                    @if($worker->designation)
+                        <div class="w-desig">{{ $worker->designation }}</div>
                     @endif
-                    @if($worker->unit?->name)
-                        <div class="w-dept">{{ $worker->unit->name }}</div>
+                    @if($worker->ward?->name)
+                        <div class="w-dept">Ward: {{ $worker->ward->name }}</div>
+                    @elseif($worker->lga?->name)
+                        <div class="w-dept">{{ $worker->lga->name }}, Lagos State</div>
                     @endif
-                    <div class="w-no">No: {{ $worker->staff_number }}</div>
+                    @if($worker->residential_address)
+                        <div class="w-dept" style="font-size: 5pt;">{{ Str::limit($worker->residential_address, 55) }}</div>
+                    @endif
+                    <div class="w-no">ID: {{ $worker->staff_number }}</div>
                 </td>
             </tr>
         </table>
@@ -247,8 +251,8 @@ body {
                     <div class="bv">{{ ucfirst($worker->gender?->value ?? 'N/A') }}</div>
                 </td>
                 <td style="width: 18%;">
-                    <div class="bl">Dept</div>
-                    <div class="bv" style="font-size: 4.5pt;">{{ $worker->department?->name ?? 'N/A' }}</div>
+                    <div class="bl">Ward</div>
+                    <div class="bv" style="font-size: 4.5pt;">{{ $worker->ward?->name ?? ($worker->lga?->name ?? 'N/A') }}</div>
                 </td>
             </tr>
         </table>

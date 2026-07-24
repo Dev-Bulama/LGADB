@@ -10,7 +10,7 @@
                 <div class="text-center mb-4">
                     <div class="text-xs uppercase tracking-widest text-green-200 mb-1">Federal Republic of Nigeria</div>
                     <div class="font-bold text-lg">{{ config('lga.name') }}</div>
-                    <div class="text-green-200 text-sm">Official Staff Identification Card</div>
+                    <div class="text-green-200 text-sm">Official Resident Identity Card</div>
                 </div>
                 <div class="flex items-center space-x-4 bg-white/10 rounded-xl p-4">
                     <div class="w-20 h-24 rounded-lg overflow-hidden bg-white/20 flex items-center justify-center">
