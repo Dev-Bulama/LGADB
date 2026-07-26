@@ -446,7 +446,7 @@ class WorkerResource extends Resource
                         }
                         Notification::make()
                             ->title('Citizen Suspended')
-                            ->body("{$record->full_name} has been suspended.'))
+                            ->body("{$record->full_name} has been suspended.")
                             ->warning()
                             ->send();
                     })
