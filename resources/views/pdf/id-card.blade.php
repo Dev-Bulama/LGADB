@@ -186,14 +186,8 @@ body {
                     @if($worker->designation)
                         <div class="w-desig">{{ $worker->designation }}</div>
                     @endif
-                    @if($worker->ward?->name)
-                        <div class="w-dept">Ward: {{ $worker->ward->name }}</div>
-                    @elseif($worker->lga?->name)
-                        <div class="w-dept">{{ $worker->lga->name }}, Lagos State</div>
-                    @endif
-                    @if($worker->residential_address)
-                        <div class="w-dept" style="font-size: 5pt;">{{ Str::limit($worker->residential_address, 55) }}</div>
-                    @endif
+                    <div class="w-dept" style="font-size: 5pt;">Ayobo Ipaja Local Council Development Area</div>
+                    <div class="w-dept" style="font-size: 5pt;">Igbogila, Ipaja Road. Lagos</div>
                     <div class="w-no">ID: {{ $worker->staff_number }}</div>
                 </td>
             </tr>
