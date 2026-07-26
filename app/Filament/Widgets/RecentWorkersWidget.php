@@ -14,7 +14,7 @@ class RecentWorkersWidget extends BaseWidget
 
     protected int | string | array $columnSpan = 'full';
 
-    protected static ?string $heading = 'Recently Registered Workers';
+    protected static ?string $heading = 'Recently Registered Citizens';
 
     public function table(Table $table): Table
     {
@@ -35,7 +35,7 @@ class RecentWorkersWidget extends BaseWidget
                     ->weight('bold'),
 
                 Tables\Columns\TextColumn::make('staff_number')
-                    ->label('Staff No.')
+                    ->label('Citizen ID')
                     ->fontFamily('mono'),
 
                 Tables\Columns\TextColumn::make('department.name')

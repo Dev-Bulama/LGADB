@@ -34,7 +34,13 @@ class WorkerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Workforce';
+    protected static ?string $navigationLabel = 'Citizens';
+
+    protected static ?string $navigationGroup = 'Citizen Registry';
+
+    protected static ?string $modelLabel = 'Citizen';
+
+    protected static ?string $pluralModelLabel = 'Citizens';
 
     protected static ?int $navigationSort = 1;
 
@@ -43,7 +49,7 @@ class WorkerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\Tabs::make('Worker Details')
+            Forms\Components\Tabs::make('Citizen Details')
                 ->tabs([
 
                     // TAB 1: Personal Information
@@ -166,20 +172,41 @@ class WorkerResource extends Resource
                             ]),
                         ]),
 
-                    // TAB 3: Employment
-                    Forms\Components\Tabs\Tab::make('Employment')
-                        ->icon('heroicon-o-briefcase')
+                    // TAB 3: Registration Details
+                    Forms\Components\Tabs\Tab::make('Registration Details')
+                        ->icon('heroicon-o-identification')
                         ->schema([
                             Forms\Components\Grid::make(2)->schema([
+                                Forms\Components\TextInput::make('staff_number')
+                                    ->label('Citizen ID')
+                                    ->maxLength(50)
+                                    ->unique(Worker::class, 'staff_number', ignoreRecord: true),
+
+                                Forms\Components\TextInput::make('designation')
+                                    ->label('Occupation / Job Title')
+                                    ->maxLength(150),
+                            ]),
+
+                            Forms\Components\Grid::make(2)->schema([
+                                Forms\Components\Select::make('employment_type')
+                                    ->label('Residency Type')
+                                    ->options(EmploymentType::options()),
+
+                                Forms\Components\DatePicker::make('employment_date')
+                                    ->label('Registration Date')
+                                    ->native(false),
+                            ]),
+
+                            Forms\Components\Grid::make(2)->schema([
                                 Forms\Components\Select::make('department_id')
-                                    ->label('Department')
+                                    ->label('Category / Group')
                                     ->options(Department::orderBy('name')->pluck('name', 'id'))
                                     ->searchable()
                                     ->live()
                                     ->afterStateUpdated(fn (Set $set) => $set('unit_id', null)),
 
                                 Forms\Components\Select::make('unit_id')
-                                    ->label('Unit')
+                                    ->label('Sub-Category')
                                     ->options(function (Get $get) {
                                         $deptId = $get('department_id');
                                         if (!$deptId) return [];
@@ -189,65 +216,44 @@ class WorkerResource extends Resource
                             ]),
 
                             Forms\Components\Grid::make(2)->schema([
+                                Forms\Components\TextInput::make('employee_number')
+                                    ->label('Reference Number')
+                                    ->maxLength(50),
+
                                 Forms\Components\Select::make('office_id')
-                                    ->label('Office')
+                                    ->label('Registration Office')
                                     ->options(Office::orderBy('name')->pluck('name', 'id'))
                                     ->searchable(),
-
-                                Forms\Components\TextInput::make('designation')
-                                    ->label('Designation / Job Title')
-                                    ->maxLength(150),
-                            ]),
-
-                            Forms\Components\Grid::make(3)->schema([
-                                Forms\Components\TextInput::make('grade_level')
-                                    ->label('Grade Level')
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->maxValue(20),
-
-                                Forms\Components\TextInput::make('step')
-                                    ->label('Step')
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->maxValue(15),
-
-                                Forms\Components\TextInput::make('salary_category')
-                                    ->label('Salary Category')
-                                    ->maxLength(50),
-                            ]),
-
-                            Forms\Components\Grid::make(3)->schema([
-                                Forms\Components\Select::make('employment_type')
-                                    ->label('Employment Type')
-                                    ->options(EmploymentType::options())
-                                    ->required(),
-
-                                Forms\Components\DatePicker::make('employment_date')
-                                    ->label('Employment Date')
-                                    ->native(false),
-
-                                Forms\Components\DatePicker::make('confirmation_date')
-                                    ->label('Confirmation Date')
-                                    ->native(false),
-                            ]),
-
-                            Forms\Components\Grid::make(2)->schema([
-                                Forms\Components\TextInput::make('employee_number')
-                                    ->label('Employee Number')
-                                    ->maxLength(50),
-
-                                Forms\Components\TextInput::make('staff_number')
-                                    ->label('Staff Number')
-                                    ->maxLength(50)
-                                    ->unique(Worker::class, 'staff_number', ignoreRecord: true),
                             ]),
                         ]),
 
-                    // TAB 4: Next of Kin
-                    Forms\Components\Tabs\Tab::make('Next of Kin')
+                    // TAB 4: Emergency Contact
+                    Forms\Components\Tabs\Tab::make('Emergency Contact')
                         ->icon('heroicon-o-user-group')
                         ->schema([
+                            Forms\Components\Section::make('Emergency Contact')
+                                ->schema([
+                                    Forms\Components\Grid::make(3)->schema([
+                                        Forms\Components\TextInput::make('emergency_contact_name')
+                                            ->label('Contact Name')
+                                            ->maxLength(200),
+
+                                        Forms\Components\TextInput::make('emergency_contact_phone')
+                                            ->label('Contact Phone')
+                                            ->tel()
+                                            ->maxLength(20),
+
+                                        Forms\Components\TextInput::make('next_of_kin_relationship')
+                                            ->label('Relationship')
+                                            ->maxLength(50),
+                                    ]),
+
+                                    Forms\Components\Textarea::make('next_of_kin_address')
+                                        ->label('Contact Address')
+                                        ->rows(2)
+                                        ->columnSpanFull(),
+                                ]),
+
                             Forms\Components\Section::make('Next of Kin')
                                 ->schema([
                                     Forms\Components\Grid::make(3)->schema([
@@ -260,28 +266,9 @@ class WorkerResource extends Resource
                                             ->tel()
                                             ->maxLength(20),
 
-                                        Forms\Components\TextInput::make('next_of_kin_relationship')
-                                            ->label('Relationship')
-                                            ->maxLength(50),
-                                    ]),
-
-                                    Forms\Components\Textarea::make('next_of_kin_address')
-                                        ->label('Address')
-                                        ->rows(2)
-                                        ->columnSpanFull(),
-                                ]),
-
-                            Forms\Components\Section::make('Emergency Contact')
-                                ->schema([
-                                    Forms\Components\Grid::make(2)->schema([
-                                        Forms\Components\TextInput::make('emergency_contact_name')
-                                            ->label('Contact Name')
-                                            ->maxLength(200),
-
-                                        Forms\Components\TextInput::make('emergency_contact_phone')
-                                            ->label('Contact Phone')
-                                            ->tel()
-                                            ->maxLength(20),
+                                        Forms\Components\DatePicker::make('confirmation_date')
+                                            ->label('Date of Next Renewal')
+                                            ->native(false),
                                     ]),
                                 ]),
                         ]),
@@ -292,7 +279,7 @@ class WorkerResource extends Resource
                         ->schema([
                             Forms\Components\Grid::make(2)->schema([
                                 Forms\Components\Select::make('status')
-                                    ->label('Worker Status')
+                                    ->label('Citizen Status')
                                     ->options(WorkerStatus::options())
                                     ->default(WorkerStatus::Pending->value)
                                     ->required(),
@@ -350,23 +337,23 @@ class WorkerResource extends Resource
                     ->weight('bold'),
 
                 Tables\Columns\TextColumn::make('staff_number')
-                    ->label('Staff No.')
+                    ->label('Citizen ID')
                     ->searchable()
                     ->copyable()
                     ->fontFamily('mono'),
 
-                Tables\Columns\TextColumn::make('department.name')
-                    ->label('Department')
+                Tables\Columns\TextColumn::make('ward.name')
+                    ->label('Ward')
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('designation')
-                    ->label('Designation')
+                    ->label('Occupation')
                     ->limit(30)
                     ->tooltip(fn ($record) => $record->designation),
 
                 Tables\Columns\TextColumn::make('employment_type')
-                    ->label('Type')
+                    ->label('Residency Type')
                     ->badge()
                     ->formatStateUsing(fn ($state) => $state instanceof EmploymentType ? $state->label() : $state)
                     ->color('info'),
@@ -384,7 +371,7 @@ class WorkerResource extends Resource
                     ->color(fn ($state) => $state instanceof VerificationStatus ? $state->color() : 'gray'),
 
                 Tables\Columns\TextColumn::make('employment_date')
-                    ->label('Employed')
+                    ->label('Registered')
                     ->date('d M Y')
                     ->sortable(),
             ])
@@ -421,8 +408,8 @@ class WorkerResource extends Resource
                     ->icon('heroicon-o-check-badge')
                     ->color('success')
                     ->requiresConfirmation()
-                    ->modalHeading('Verify Worker')
-                    ->modalDescription('This will mark the worker as Active and set their verification status to Approved.')
+                    ->modalHeading('Verify Citizen')
+                    ->modalDescription('This will mark the citizen as Active and set their verification status to Approved.')
                     ->action(function (Worker $record) {
                         $record->update([
                             'status' => WorkerStatus::Active,
@@ -436,7 +423,7 @@ class WorkerResource extends Resource
                             } catch (\Throwable) {}
                         }
                         Notification::make()
-                            ->title('Worker Verified')
+                            ->title('Citizen Verified')
                             ->body("{$record->full_name} has been verified and set to Active.")
                             ->success()
                             ->send();
@@ -448,8 +435,8 @@ class WorkerResource extends Resource
                     ->icon('heroicon-o-no-symbol')
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->modalHeading('Suspend Worker')
-                    ->modalDescription('Are you sure you want to suspend this worker?')
+                    ->modalHeading('Suspend Citizen')
+                    ->modalDescription('Are you sure you want to suspend this citizen record?')
                     ->action(function (Worker $record) {
                         $record->update(['status' => WorkerStatus::Suspended]);
                         if ($record->user?->email) {
@@ -458,8 +445,8 @@ class WorkerResource extends Resource
                             } catch (\Throwable) {}
                         }
                         Notification::make()
-                            ->title('Worker Suspended')
-                            ->body("{$record->full_name} has been suspended.")
+                            ->title('Citizen Suspended')
+                            ->body("{$record->full_name} has been suspended.'))
                             ->warning()
                             ->send();
                     })
@@ -474,7 +461,7 @@ class WorkerResource extends Resource
                             ->label('Rejection Reason')
                             ->required()
                             ->rows(3)
-                            ->placeholder('Explain why this worker record is being rejected...'),
+                            ->placeholder('Explain why this citizen record is being rejected...'),
                     ])
                     ->action(function (Worker $record, array $data) {
                         $record->update([
@@ -487,7 +474,7 @@ class WorkerResource extends Resource
                             } catch (\Throwable) {}
                         }
                         Notification::make()
-                            ->title('Worker Rejected')
+                            ->title('Citizen Rejected')
                             ->body("{$record->full_name}'s record has been rejected.")
                             ->danger()
                             ->send();
@@ -500,7 +487,7 @@ class WorkerResource extends Resource
                     ->color('info')
                     ->requiresConfirmation()
                     ->modalHeading('Generate ID Card')
-                    ->modalDescription('Generate a PDF ID card for this worker?')
+                    ->modalDescription('Generate a PDF Resident ID card for this citizen?')
                     ->action(function (Worker $record) {
                         try {
                             (new IdCardService())->generate($record);
@@ -529,7 +516,7 @@ class WorkerResource extends Resource
                     ->icon('heroicon-o-arrow-down-tray')
                     ->color('gray')
                     ->action(function () {
-                        $filename = 'workers-' . now()->format('Y-m-d') . '.csv';
+                        $filename = 'citizens-' . now()->format('Y-m-d') . '.csv';
                         $headers  = [
                             'Content-Type'        => 'text/csv',
                             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
@@ -540,11 +527,11 @@ class WorkerResource extends Resource
                         $callback = function () use ($workers) {
                             $handle = fopen('php://output', 'w');
                             fputcsv($handle, [
-                                'Staff Number', 'Surname', 'First Name', 'Middle Name',
+                                'Citizen ID', 'Surname', 'First Name', 'Middle Name',
                                 'Gender', 'Date of Birth', 'Email', 'Phone',
-                                'Department', 'Unit', 'Office', 'Designation',
-                                'Grade Level', 'Step', 'Employment Type', 'Employment Date',
-                                'Status', 'Verification Status', 'LGA',
+                                'Category', 'Sub-Category', 'Office', 'Occupation',
+                                'Residency Type', 'Registration Date',
+                                'Status', 'Verification Status', 'LGA', 'Ward',
                             ]);
                             foreach ($workers as $w) {
                                 fputcsv($handle, [
@@ -645,76 +632,67 @@ class WorkerResource extends Resource
                         ->label('Ward'),
                 ]),
 
-            Infolists\Components\Section::make('Employment Details')
-                ->icon('heroicon-o-briefcase')
+            Infolists\Components\Section::make('Registration Details')
+                ->icon('heroicon-o-identification')
                 ->columns(3)
                 ->schema([
                     Infolists\Components\TextEntry::make('staff_number')
-                        ->label('Staff Number')
+                        ->label('Citizen ID')
                         ->copyable()
                         ->fontFamily('mono'),
 
                     Infolists\Components\TextEntry::make('employee_number')
-                        ->label('Employee Number'),
+                        ->label('Reference Number'),
 
                     Infolists\Components\TextEntry::make('designation')
-                        ->label('Designation'),
+                        ->label('Occupation'),
 
                     Infolists\Components\TextEntry::make('department.name')
-                        ->label('Department'),
+                        ->label('Category / Group'),
 
                     Infolists\Components\TextEntry::make('unit.name')
-                        ->label('Unit'),
+                        ->label('Sub-Category'),
 
                     Infolists\Components\TextEntry::make('office.name')
-                        ->label('Office'),
-
-                    Infolists\Components\TextEntry::make('grade_level')
-                        ->label('Grade Level'),
-
-                    Infolists\Components\TextEntry::make('step')
-                        ->label('Step'),
-
-                    Infolists\Components\TextEntry::make('salary_category')
-                        ->label('Salary Category'),
+                        ->label('Registration Office'),
 
                     Infolists\Components\TextEntry::make('employment_type')
-                        ->label('Employment Type')
+                        ->label('Residency Type')
                         ->badge()
                         ->formatStateUsing(fn ($state) => $state instanceof EmploymentType ? $state->label() : $state)
                         ->color('info'),
 
                     Infolists\Components\TextEntry::make('employment_date')
-                        ->label('Employment Date')
+                        ->label('Registration Date')
                         ->date('d F Y'),
 
                     Infolists\Components\TextEntry::make('confirmation_date')
-                        ->label('Confirmation Date')
+                        ->label('Renewal Date')
                         ->date('d F Y'),
                 ]),
 
-            Infolists\Components\Section::make('Next of Kin')
+            Infolists\Components\Section::make('Emergency Contact')
                 ->icon('heroicon-o-user-group')
                 ->columns(2)
                 ->schema([
+                    Infolists\Components\TextEntry::make('emergency_contact_name')
+                        ->label('Contact Name'),
+
+                    Infolists\Components\TextEntry::make('emergency_contact_phone')
+                        ->label('Contact Phone'),
+
                     Infolists\Components\TextEntry::make('next_of_kin_name')
-                        ->label('Name'),
+                        ->label('Next of Kin Name'),
 
                     Infolists\Components\TextEntry::make('next_of_kin_phone')
-                        ->label('Phone'),
+                        ->label('Next of Kin Phone'),
 
                     Infolists\Components\TextEntry::make('next_of_kin_relationship')
                         ->label('Relationship'),
 
                     Infolists\Components\TextEntry::make('next_of_kin_address')
-                        ->label('Address')
+                        ->label('Contact Address')
                         ->columnSpanFull(),
-
-                    Infolists\Components\TextEntry::make('emergency_contact_name')
-                        ->label('Emergency Contact Name'),
-
-                    Infolists\Components\TextEntry::make('emergency_contact_phone')
-                        ->label('Emergency Contact Phone'),
                 ]),
 
             Infolists\Components\Section::make('Status & Verification')

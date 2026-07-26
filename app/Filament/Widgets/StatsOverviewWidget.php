@@ -23,17 +23,17 @@ class StatsOverviewWidget extends BaseWidget
         $totalDepartments = Department::where('is_active', true)->count();
 
         return [
-            Stat::make('Total Workers', $totalWorkers)
-                ->description('All registered workers')
+            Stat::make('Total Citizens', $totalWorkers)
+                ->description('All registered citizens')
                 ->descriptionIcon('heroicon-o-users')
                 ->color('primary'),
 
-            Stat::make('Active Staff', $activeWorkers)
+            Stat::make('Active Citizens', $activeWorkers)
                 ->description('Currently active employees')
                 ->descriptionIcon('heroicon-o-check-circle')
                 ->color('success'),
 
-            Stat::make('Verified Workers', $verifiedWorkers)
+            Stat::make('Verified Citizens', $verifiedWorkers)
                 ->description('Identity verified')
                 ->descriptionIcon('heroicon-o-shield-check')
                 ->color('success'),
@@ -43,7 +43,7 @@ class StatsOverviewWidget extends BaseWidget
                 ->descriptionIcon('heroicon-o-clock')
                 ->color('warning'),
 
-            Stat::make('Suspended Workers', $suspendedWorkers)
+            Stat::make('Suspended Citizens', $suspendedWorkers)
                 ->description('Currently suspended')
                 ->descriptionIcon('heroicon-o-no-symbol')
                 ->color('danger'),

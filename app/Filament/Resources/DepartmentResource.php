@@ -76,7 +76,7 @@ class DepartmentResource extends Resource
                     ->color('info'),
 
                 Tables\Columns\TextColumn::make('workers_count')
-                    ->label('Workers')
+                    ->label('Citizens')
                     ->counts('workers')
                     ->badge()
                     ->color('primary')

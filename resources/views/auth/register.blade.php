@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
-@section('title', 'Worker Registration')
-@section('description', 'Register as an LGA staff member to access the worker portal.')
+@section('title', 'Citizen Registration')
+@section('description', 'Register as a citizen of Alimosho LGA to access your portal.')
 
 @section('content')
 
@@ -13,7 +13,7 @@
             <div class="w-16 h-16 gov-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <span class="text-white font-extrabold text-lg">LGA</span>
             </div>
-            <h1 class="text-3xl font-extrabold text-gray-900">Staff Registration</h1>
+            <h1 class="text-3xl font-extrabold text-gray-900">Citizen Registration</h1>
             <p class="text-gray-500 text-sm mt-2">{{ $appSettings['org_name'] ?? config('app.name') }}</p>
         </div>
 
@@ -128,11 +128,11 @@
                 </div>
             </div>
 
-            {{-- Section 3: Employment Details --}}
+            {{-- Section 3: Registration Details --}}
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <h2 class="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span class="w-6 h-6 rounded-full bg-green-700 text-white text-xs flex items-center justify-center font-bold">3</span>
-                    Employment Details
+                    Registration Details
                 </h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -149,13 +149,13 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Designation / Job Title <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Occupation / Job Title <span class="text-red-500">*</span></label>
                         <input type="text" name="designation" value="{{ old('designation') }}" required
                                class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 @error('designation') border-red-400 bg-red-50 @enderror"
                                placeholder="e.g. Administrative Officer">
                     </div>
                     <div class="sm:col-span-2">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Employment Type <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Residency Type <span class="text-red-500">*</span></label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                             @foreach(['permanent' => 'Permanent', 'contract' => 'Contract', 'temporary' => 'Temporary', 'casual' => 'Casual'] as $val => $label)
                             <label class="flex items-center gap-2 border rounded-lg px-3 py-2.5 cursor-pointer hover:border-green-400 transition text-sm

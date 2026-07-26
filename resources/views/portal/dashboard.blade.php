@@ -23,7 +23,7 @@
                     <p class="text-green-200 text-sm">Welcome back,</p>
                     <h1 class="text-2xl font-extrabold">{{ $worker?->full_name ?? $user->name }}</h1>
                     @if($worker)
-                        <p class="text-green-200 text-sm">{{ $worker->designation ?? 'LGA Staff' }} &bull; {{ $worker->staff_number }}</p>
+                        <p class="text-green-200 text-sm">{{ $worker->designation ?? 'Alimosho LGA Resident' }} &bull; {{ $worker->staff_number }}</p>
                     @endif
                 </div>
             </div>
@@ -34,7 +34,7 @@
                             <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            Verified Staff
+                            Verified Citizen
                         </span>
                     @elseif($worker->verification_status?->value === 'pending')
                         <span class="inline-flex items-center bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-2 rounded-full">
@@ -96,7 +96,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
-                <span class="text-xs font-semibold text-gray-700">Employment History</span>
+                <span class="text-xs font-semibold text-gray-700">Registration History</span>
             </a>
         </div>
     </div>
@@ -108,11 +108,11 @@
                 <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
-                Employment Details
+                Registration Details
             </h2>
             <dl class="space-y-3 text-sm">
                 <div class="flex justify-between">
-                    <dt class="text-gray-400 font-medium">Staff Number</dt>
+                    <dt class="text-gray-400 font-medium">Citizen ID</dt>
                     <dd class="font-mono font-bold text-gray-800">{{ $worker->staff_number }}</dd>
                 </div>
                 <div class="flex justify-between">
@@ -124,7 +124,7 @@
                     <dd class="text-gray-800">{{ $worker->unit?->name ?? 'N/A' }}</dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-400 font-medium">Designation</dt>
+                    <dt class="text-gray-400 font-medium">Occupation</dt>
                     <dd class="text-gray-800">{{ $worker->designation ?? 'N/A' }}</dd>
                 </div>
                 <div class="flex justify-between">
@@ -132,11 +132,11 @@
                     <dd class="text-gray-800">{{ $worker->grade_level ?? 'N/A' }}{{ $worker->step ? ' / Step ' . $worker->step : '' }}</dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-400 font-medium">Employment Date</dt>
+                    <dt class="text-gray-400 font-medium">Registration Date</dt>
                     <dd class="text-gray-800">{{ optional($worker->employment_date)->format('d M Y') ?? 'N/A' }}</dd>
                 </div>
                 <div class="flex justify-between">
-                    <dt class="text-gray-400 font-medium">Employment Type</dt>
+                    <dt class="text-gray-400 font-medium">Residency Type</dt>
                     <dd class="text-gray-800">{{ $worker->employment_type?->label() ?? 'N/A' }}</dd>
                 </div>
                 @if($worker->id_expiry_date)
@@ -221,8 +221,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
             </div>
-            <h3 class="font-bold text-yellow-900 mb-2">No Worker Record Found</h3>
-            <p class="text-yellow-700 text-sm">Your account is not linked to a worker record. Please contact the LGA HR department to complete your registration.</p>
+            <h3 class="font-bold text-yellow-900 mb-2">No Citizen Record Found</h3>
+            <p class="text-yellow-700 text-sm">Your account is not yet linked to a citizen record. Please contact the LGA Registration office to complete your registration.</p>
         </div>
     @endif
 
