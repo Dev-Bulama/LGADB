@@ -159,7 +159,7 @@ body {
                     <div class="logo-circle"><span class="logo-text">LGA</span></div>
                 </td>
                 <td>
-                    <div class="hdr-org">{{ strtoupper(config('lga.name', 'Alimosho LGA')) }}</div>
+                    <div class="hdr-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
                     <div class="hdr-sub">Official Resident Identity Card</div>
                 </td>
             </tr>
@@ -204,7 +204,7 @@ body {
                     </div>
                     <div style="margin-top: 4pt;">
                         <div class="sig-line"></div>
-                        <div class="sig-label">{{ config('lga.name', 'Alimosho LGA') }} — Authorised Signatory</div>
+                        <div class="sig-label">{{ config('lga.name', 'Ayobo Ipaja Local Council Development Area') }} — Authorised Signatory</div>
                     </div>
                 </td>
                 <td class="qr-wrap">
@@ -224,7 +224,7 @@ body {
 <div class="back">
 
     <div class="back-hdr">
-        <div class="back-org">{{ strtoupper(config('lga.name', 'Alimosho LGA')) }}</div>
+        <div class="back-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
         <div class="back-tag">If found, please return to the LGA Secretariat</div>
     </div>
 
@@ -263,7 +263,7 @@ body {
         <table>
             <tr>
                 <td style="width: 62%;">
-                    <div class="terms">This card is the property of {{ config('lga.name', 'Alimosho LGA') }}.
+                    <div class="terms">This card is the property of {{ config('lga.name', 'Ayobo Ipaja Local Council Development Area') }}.
                     Misuse is a punishable offence under Nigerian law. Report lost cards immediately to the LGA Secretariat.</div>
                 </td>
                 <td class="ci" style="width: 38%;">

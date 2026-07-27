@@ -22,7 +22,7 @@
             </svg>
             <div>
                 <p class="text-green-800 font-semibold">Verified Citizen Record Found</p>
-                <p class="text-green-700 text-sm">This citizen is verified and approved in the Alimosho LGA database.</p>
+                <p class="text-green-700 text-sm">This citizen is verified and approved in the Ayobo Ipaja LCDA database.</p>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                     <!-- Info -->
                     <div class="flex-1 min-w-0">
                         <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ $worker->full_name }}</h2>
-                        <p class="text-green-700 font-semibold mb-3">{{ $worker->designation ?? 'Alimosho LGA Citizen' }}</p>
+                        <p class="text-green-700 font-semibold mb-3">{{ $worker->designation ?? 'Ayobo Ipaja LCDA Citizen' }}</p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                             <div>

@@ -23,7 +23,7 @@
                     <p class="text-green-200 text-sm">Welcome back,</p>
                     <h1 class="text-2xl font-extrabold">{{ $worker?->full_name ?? $user->name }}</h1>
                     @if($worker)
-                        <p class="text-green-200 text-sm">{{ $worker->designation ?? 'Alimosho LGA Resident' }} &bull; {{ $worker->staff_number }}</p>
+                        <p class="text-green-200 text-sm">{{ $worker->designation ?? 'Ayobo Ipaja LCDA Resident' }} &bull; {{ $worker->staff_number }}</p>
                     @endif
                 </div>
             </div>

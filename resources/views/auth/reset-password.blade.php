@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Reset Password')
-@section('description', 'Set a new password for your Alimosho LGA Citizen Portal account.')
+@section('description', 'Set a new password for your Ayobo Ipaja LCDA Citizen Portal account.')
 
 @section('content')
 

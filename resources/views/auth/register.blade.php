@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Citizen Registration')
-@section('description', 'Register as a citizen of Alimosho LGA to access your portal.')
+@section('description', 'Register as a citizen of Ayobo Ipaja LCDA to access your portal.')
 
 @section('content')
 

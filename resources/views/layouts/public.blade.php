@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', config('app.name')) — Alimosho Citizen Identity & Verification Platform</title>
-    <meta name="description" content="@yield('description', 'Official Alimosho LGA Citizen Identity & Verification Database Platform')">
+    <title>@yield('title', config('app.name')) — Ayobo Ipaja Citizen Identity & Verification Platform</title>
+    <meta name="description" content="@yield('description', 'Official Ayobo Ipaja LCDA Citizen Identity & Verification Platform')">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -146,7 +146,7 @@
                         <h3 class="text-white font-bold text-lg">{{ config('app.name') }}</h3>
                     </div>
                     <p class="text-green-200 text-sm leading-relaxed">
-                        Official Citizen Identity &amp; Verification Database Platform for Alimosho Local Government Authority, Lagos State, Nigeria.
+                        Official Citizen Identity &amp; Verification Database Platform for Ayobo Ipaja Local Council Development Area, Lagos State, Nigeria.
                     </p>
                 </div>
                 <div>

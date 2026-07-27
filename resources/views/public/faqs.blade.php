@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @section('title', 'Frequently Asked Questions')
-@section('description', 'Answers to common questions about the Alimosho LGA Citizen Identity & Verification Platform.')
+@section('description', 'Answers to common questions about the Ayobo Ipaja LCDA Citizen Identity & Verification Platform.')
 
 @section('content')
 
 <div class="gov-gradient py-12">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">Frequently Asked Questions</h1>
-        <p class="text-green-100 text-lg">Find answers to common questions about the Alimosho Citizen Identity & Verification Platform.</p>
+        <p class="text-green-100 text-lg">Find answers to common questions about the Ayobo Ipaja Citizen Identity & Verification Platform.</p>
     </div>
 </div>
 

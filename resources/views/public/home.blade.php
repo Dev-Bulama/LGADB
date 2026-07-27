@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Home')
-@section('description', 'Official Alimosho LGA Citizen Identity & Verification Database Platform — verify citizens, access your portal.')
+@section('description', 'Official Ayobo Ipaja LCDA Citizen Identity & Verification Platform — verify citizens, access your portal.')
 
 @section('content')
 
@@ -26,7 +26,7 @@
             <span class="text-green-200">Verification Platform</span>
         </h1>
         <p class="text-green-100 text-base sm:text-lg mb-10 max-w-2xl mx-auto">
-            The official platform for registering, verifying, and authenticating the identity of every citizen and resident of {{ $appSettings['lga_name'] ?? 'Alimosho LGA' }}.
+            The official platform for registering, verifying, and authenticating the identity of every citizen and resident of {{ $appSettings['lga_name'] ?? 'Ayobo Ipaja LCDA' }}.
         </p>
 
         <!-- Google-style search bar -->
@@ -192,7 +192,7 @@ function homeSearch() {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-extrabold text-gray-900 mb-3">System Features</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">A comprehensive digital platform to register, manage, verify and authenticate the identity of every citizen and resident of Alimosho LGA.</p>
+            <p class="text-gray-500 max-w-2xl mx-auto">A comprehensive digital platform to register, manage, verify and authenticate the identity of every citizen and resident of Ayobo Ipaja LCDA.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Feature 1 -->
@@ -203,7 +203,7 @@ function homeSearch() {
                     </svg>
                 </div>
                 <h3 class="text-lg font-bold text-gray-900 mb-2">Citizen Verification</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">Instantly verify any Alimosho LGA citizen or resident by Citizen ID, full name, NIN, phone, or verification code. Get real-time results.</p>
+                <p class="text-gray-500 text-sm leading-relaxed">Instantly verify any Ayobo Ipaja LCDA citizen or resident by Citizen ID, full name, NIN, phone, or verification code. Get real-time results.</p>
                 <a href="{{ route('verify.index') }}" class="inline-block mt-4 text-green-700 font-semibold text-sm hover:underline">Verify Now →</a>
             </div>
 

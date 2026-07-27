@@ -13,7 +13,7 @@
             Verified Citizen Record
         </span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-white">{{ $worker->full_name }}</h1>
-        <p class="text-green-200 mt-2">{{ $worker->designation ?? 'Alimosho LGA Registered Citizen' }}</p>
+        <p class="text-green-200 mt-2">{{ $worker->designation ?? 'Ayobo Ipaja LCDA Registered Citizen' }}</p>
     </div>
 </div>
 
@@ -98,7 +98,7 @@
             <div class="mt-6 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div class="flex items-center space-x-2">
                     <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-sm text-gray-600">This record is <strong class="text-green-700">active and verified</strong> in the Alimosho LGA Citizen Identity & Verification Platform.</span>
+                    <span class="text-sm text-gray-600">This record is <strong class="text-green-700">active and verified</strong> in the Ayobo Ipaja LCDA Citizen Identity & Verification Platform.</span>
                 </div>
                 <p class="text-xs text-gray-400">Verified on {{ optional($worker->verified_at)->format('d M Y \a\t H:i') }}</p>
             </div>

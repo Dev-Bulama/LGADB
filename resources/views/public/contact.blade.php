@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Contact Us')
-@section('description', 'Get in touch with the Alimosho LGA Citizen Identity & Verification Platform team.')
+@section('description', 'Get in touch with the Ayobo Ipaja LCDA Citizen Identity & Verification Platform team.')
 
 @section('content')
 

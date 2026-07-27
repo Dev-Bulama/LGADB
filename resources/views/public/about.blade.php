@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @section('title', 'About')
-@section('description', 'About the Alimosho LGA Citizen Identity & Verification Platform.')
+@section('description', 'About the Ayobo Ipaja LCDA Citizen Identity & Verification Platform.')
 
 @section('content')
 
 <div class="gov-gradient py-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">About This System</h1>
-        <p class="text-green-100 text-lg">Learn about the Alimosho LGA Citizen Identity &amp; Verification Database Platform.</p>
+        <p class="text-green-100 text-lg">Learn about the Ayobo Ipaja LCDA Citizen Identity &amp; Verification Database Platform.</p>
     </div>
 </div>
 
@@ -22,17 +22,17 @@
     @else
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 space-y-6">
             <div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">About the Alimosho Citizen Identity & Verification Platform</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">About the Ayobo Ipaja Citizen Identity & Verification Platform</h2>
                 <p class="text-gray-600 leading-relaxed">
-                    The Alimosho Citizen Identity &amp; Verification Database Platform is the official digital system
-                    for registering, managing, verifying and authenticating the identity of every citizen and resident of Alimosho LGA. It was developed to
+                    The Ayobo Ipaja Citizen Identity &amp; Verification Platform is the official digital system
+                    for registering, managing, verifying and authenticating the identity of every citizen and resident of Ayobo Ipaja LCDA. It was developed to
                     enhance transparency, accountability, and public trust in local government service delivery across Lagos State.
                 </p>
             </div>
             <div>
                 <h3 class="text-lg font-bold text-gray-900 mb-3">Our Mission</h3>
                 <p class="text-gray-600 leading-relaxed">
-                    To maintain a single, verified record of every citizen and resident of Alimosho LGA — enabling accurate targeting of government services, reducing
+                    To maintain a single, verified record of every citizen and resident of Ayobo Ipaja LCDA — enabling accurate targeting of government services, reducing
                     identity fraud, ensuring proof of address for every resident, and strengthening the security and accountability of the LGA.
                 </p>
             </div>

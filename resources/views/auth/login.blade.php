@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Citizen Login')
-@section('description', 'Secure login portal for Alimosho LGA citizens.')
+@section('description', 'Secure login portal for Ayobo Ipaja LCDA citizens.')
 
 @section('content')
 
@@ -20,7 +20,7 @@
         {{-- Notice --}}
         <div class="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
             <p class="text-green-800 text-xs font-semibold">
-                This portal is for registered Alimosho LGA citizens only.
+                This portal is for registered Ayobo Ipaja LCDA citizens only.
             </p>
         </div>
 

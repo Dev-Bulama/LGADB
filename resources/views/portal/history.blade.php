@@ -9,7 +9,7 @@
 
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h2 class="font-bold text-gray-900 mb-1">Registration Timeline</h2>
-        <p class="text-sm text-gray-400">A record of your registration history with Alimosho LGA.</p>
+        <p class="text-sm text-gray-400">A record of your registration history with Ayobo Ipaja LCDA.</p>
     </div>
 
     {{-- $worker and $histories are passed from WorkerPortalController --}}

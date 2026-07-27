@@ -47,7 +47,7 @@
                 @endif
                 <div class="flex-1">
                     <h2 class="text-2xl font-extrabold text-gray-900">{{ $worker->full_name }}</h2>
-                    <p class="text-green-700 font-medium mb-3">{{ $worker->designation ?? 'Alimosho LGA Citizen' }}</p>
+                    <p class="text-green-700 font-medium mb-3">{{ $worker->designation ?? 'Ayobo Ipaja LCDA Citizen' }}</p>
                     <dl class="grid grid-cols-2 gap-3 text-sm">
                         <div>
                             <dt class="text-gray-400 text-xs uppercase font-semibold">Citizen ID</dt>
