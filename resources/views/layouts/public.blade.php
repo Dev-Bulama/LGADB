@@ -31,8 +31,8 @@
                             <span class="text-green-800 font-extrabold text-sm">LGA</span>
                         </div>
                         <div class="hidden sm:block">
-                            <div class="text-white font-bold text-sm leading-tight">{{ $appSettings['org_name'] ?? config('app.name') }}</div>
-                            <div class="text-green-200 text-xs">Citizen Identity & Verification Platform</div>
+                            <div class="text-white font-bold text-sm leading-tight">Ayobo Ipaja Local Council Development Area</div>
+                            <div class="text-green-200 text-xs">Igbogila, Ipaja Road. Lagos</div>
                         </div>
                     </a>
                 </div>
