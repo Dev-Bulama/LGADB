@@ -50,7 +50,7 @@ class WorkerPhotoSeeder extends Seeder
                    ->toMediaCollection('profile_photo');
         }
 
-        $this->command->info('Worker passport photos seeded.');
+        $this->command->info('Citizen passport photos seeded.');
     }
 
     private function generatePassportPhoto(array $skin, array $hair, string $workerId): string

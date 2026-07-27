@@ -13,9 +13,9 @@ class ContentSeeder extends Seeder
     {
         // ── Settings ─────────────────────────────────────────────────────────────
         $settings = [
-            ['key' => 'org_name',            'value' => 'Kano Municipal LGA',  'group' => 'general'],
-            ['key' => 'org_phone',           'value' => '+2348012345678',       'group' => 'general'],
-            ['key' => 'id_card_expiry_years','value' => '2',                    'group' => 'id_card'],
+            ['key' => 'org_name',            'value' => 'Ayobo Ipaja Local Council Development Area', 'group' => 'general'],
+            ['key' => 'org_phone',           'value' => '+2348012345678',                             'group' => 'general'],
+            ['key' => 'id_card_expiry_years','value' => '3',                                          'group' => 'id_card'],
         ];
 
         foreach ($settings as &$setting) {
@@ -31,34 +31,34 @@ class ContentSeeder extends Seeder
 
         $announcements = [
             [
-                'title'   => 'Staff Verification Exercise Begins',
+                'title'   => 'Citizen Identity Verification Exercise Begins',
                 'type'    => 'announcement',
-                'excerpt' => 'All staff members are required to present themselves for the annual verification exercise starting this month.',
-                'content' => '<p>The annual staff verification exercise has officially commenced. All staff members are required to present themselves at the Human Resources Department with valid identification documents, staff ID cards, and appointment letters.</p><p>The exercise runs from Monday to Friday, 8:00 AM to 4:00 PM. Staff who fail to participate within the stipulated time will be marked as absent and may face salary suspension.</p><p>For enquiries, contact the HR Department on ext. 2201.</p>',
+                'excerpt' => 'All registered citizens are required to present themselves for the annual identity verification exercise starting this month.',
+                'content' => '<p>The annual citizen identity verification exercise has officially commenced. All registered citizens are required to present themselves at the LCDA Citizen Registry Office with valid identification documents and their citizen ID cards.</p><p>The exercise runs from Monday to Friday, 8:00 AM to 4:00 PM. Citizens who fail to participate within the stipulated period may have their records flagged for review.</p><p>For enquiries, contact the Citizen Registry Office on ext. 2201 or visit our office at Igbogila, Ipaja Road, Lagos.</p>',
             ],
             [
-                'title'   => 'New ID Card Collection Schedule',
+                'title'   => 'New Citizen ID Card Collection Schedule',
                 'type'    => 'announcement',
-                'excerpt' => 'Staff whose ID cards are ready for collection should report to the Admin office according to the schedule below.',
-                'content' => '<p>The following departments should report to the Administration office to collect their newly issued ID cards:</p><ul><li><strong>Monday:</strong> Finance & Accounts, Administration & HR</li><li><strong>Tuesday:</strong> Health Services, Social Welfare</li><li><strong>Wednesday:</strong> Education, Agriculture & Natural Resources</li><li><strong>Thursday:</strong> Works & Infrastructure, Security & Civil Defense</li></ul><p>Please bring your old ID card or appointment letter for verification.</p>',
+                'excerpt' => 'Citizens whose ID cards are ready for collection should report to the LCDA Administration office according to the schedule below.',
+                'content' => '<p>The following wards should report to the Administration office to collect their newly issued citizen ID cards:</p><ul><li><strong>Monday:</strong> Ayobo Ward 1 &amp; 2</li><li><strong>Tuesday:</strong> Ipaja Ward 1 &amp; 2</li><li><strong>Wednesday:</strong> Igbogila &amp; Abesan Wards</li><li><strong>Thursday:</strong> Ekoro &amp; Ijaiye Wards</li><li><strong>Friday:</strong> Remaining wards &amp; walk-ins</li></ul><p>Please bring your Citizen ID number or a government-issued identification document for verification. Cards not collected within 30 days will be held at the Registry Office.</p>',
             ],
             [
-                'title'   => 'Training Workshop for Administrative Staff',
+                'title'   => 'Digital Registration Drive for Unregistered Citizens',
                 'type'    => 'news',
-                'excerpt' => 'A two-day capacity building workshop is scheduled for all administrative and HR staff.',
-                'content' => '<p>The Human Resources Department is pleased to announce a two-day capacity building workshop for all administrative and HR staff. The workshop will focus on records management, digital literacy, and public service ethics.</p><p><strong>Date:</strong> To be communicated<br><strong>Venue:</strong> LGA Council Chambers, Main Secretariat<br><strong>Time:</strong> 9:00 AM – 4:00 PM daily</p><p>Attendance is compulsory for all staff in the Administration & HR department. Light refreshments will be provided. Contact HR on ext. 2201 for more information.</p>',
+                'excerpt' => 'Ayobo Ipaja LCDA is launching a ward-by-ward registration drive to capture all unregistered citizens and residents.',
+                'content' => '<p>The Ayobo Ipaja Local Council Development Area is pleased to announce a comprehensive digital registration drive aimed at capturing every unregistered citizen and resident within our boundaries.</p><p><strong>How it works:</strong> Registration officers will be deployed to each ward on a rolling schedule. Citizens should come with their NIN slip, a recent passport photograph, and proof of address (utility bill, tenancy agreement, or any official document showing your address).</p><p><strong>Why register?</strong> Registration gives you a verified digital identity and a tamper-proof citizen ID card, which can be used for residency verification by banks, employers, landlords, government agencies and security operatives.</p><p>Registration is <strong>free of charge</strong>. No citizen should pay any fee to any officer for registration. Report any demand for payment immediately.</p>',
             ],
             [
-                'title'   => 'Annual Staff Medical Check-Up',
+                'title'   => 'Notice: Public Verification Portal Now Live',
                 'type'    => 'announcement',
-                'excerpt' => 'All staff are invited to attend the annual medical examination at the LGA Health Centre.',
-                'content' => '<p>In line with our commitment to staff welfare, the Kano Municipal LGA will be conducting its annual medical check-up for all staff. The exercise will take place at the Primary Health Care Centre within the LGA premises.</p><p>Tests include blood pressure, blood glucose, BMI assessment, eye examination, and general physical examination. Results will be treated with strict confidentiality.</p><p>Staff should attend on the day assigned to their department by the Health Services Department.</p>',
+                'excerpt' => 'Any member of the public can now verify the identity and residency status of a registered citizen online.',
+                'content' => '<p>Ayobo Ipaja LCDA is pleased to announce that the Public Citizen Verification Portal is now live and accessible to any member of the public.</p><p>The portal allows banks, employers, landlords, security agencies, and any member of the public to instantly verify the identity and residency status of a registered citizen by:</p><ul><li>Scanning the QR code on the citizen ID card</li><li>Searching by Citizen ID number, full name, NIN, or phone number</li></ul><p>Visit the verification portal on this website and search for any registered citizen. Verification is instant and available 24 hours a day, 7 days a week.</p><p>For fraud reports or discrepancies, use the Contact Us page or call our hotline.</p>',
             ],
             [
-                'title'   => 'Important Notice: Update Your Staff Records',
+                'title'   => 'Important Notice: Update Your Citizen Records',
                 'type'    => 'announcement',
-                'excerpt' => 'All staff are required to update their personal and contact information in the staff management system.',
-                'content' => '<p>This is to notify all staff members that the HR Department is conducting an update of personnel records. All staff are required to submit updated information including:</p><ul><li>Current residential address</li><li>Next of kin details</li><li>Bank account information</li><li>Educational qualifications and certificates</li><li>Valid national identification number (NIN)</li></ul><p>Forms are available at the HR Department. Deadline for submission is end of the current month. Failure to update records may affect salary processing and official correspondence.</p>',
+                'excerpt' => 'All registered citizens are required to update their personal and contact information through the citizen portal.',
+                'content' => '<p>This is to notify all registered citizens that the LCDA Citizen Registry is conducting an update of citizen records. All citizens are required to verify and update the following information where applicable:</p><ul><li>Current residential address</li><li>Emergency contact details</li><li>Phone number and email address</li><li>Valid National Identification Number (NIN)</li><li>Recent passport photograph</li></ul><p>Updates can be made by logging in to your citizen portal at any time, or by visiting the Registry Office at Igbogila, Ipaja Road, Lagos. Ensuring your records are current guarantees the accuracy of your citizen ID card and residency verification.</p>',
             ],
         ];
 
@@ -82,66 +82,84 @@ class ContentSeeder extends Seeder
         $faqs = [
             // general
             [
-                'question' => 'What is the LGA Workforce Identity System?',
-                'answer'   => 'The LGA Workforce Identity System (LGADB) is a digital platform designed to manage staff records, issue digital ID cards, and verify the identity of all workers employed by the Kano Municipal Local Government Area.',
+                'question' => 'What is the Ayobo Ipaja Citizen Identity & Verification Platform?',
+                'answer'   => 'The Ayobo Ipaja Citizen Identity & Verification Database Platform is a secure, web-based digital system built to register, manage and verify the identity of every citizen and resident of Ayobo Ipaja Local Council Development Area. It replaces paper records and unverifiable residency claims with a single, tamper-proof digital database accessible from any device at any time.',
                 'category' => 'general',
                 'order'    => 1,
             ],
             [
                 'question' => 'Who can access the system?',
-                'answer'   => 'Access is granted based on role. Super Admins, HR Officers, and Department Managers have administrative access. Individual staff members can log in to view their own profile and ID card status.',
+                'answer'   => 'The public verification portal is open to anyone — banks, employers, landlords, security agencies and the general public can verify a citizen\'s identity online without logging in. Registered citizens can log in to view their own profile and download their ID card. Administrative access is role-based and restricted to authorised LCDA officers.',
                 'category' => 'general',
                 'order'    => 2,
             ],
             [
                 'question' => 'How do I reset my password?',
-                'answer'   => 'Click on "Forgot Password" on the login page and enter your registered email address. A reset link will be sent to you. If you do not receive it within 10 minutes, please contact the HR Department.',
+                'answer'   => 'Click on "Forgot Password" on the login page and enter your registered email address. A reset link will be sent to you. If you do not receive it within 10 minutes, please contact the LCDA Registry Office.',
                 'category' => 'general',
                 'order'    => 3,
             ],
+            [
+                'question' => 'Is registration mandatory for all citizens?',
+                'answer'   => 'All citizens and residents of Ayobo Ipaja LCDA are encouraged to register. A registered citizen gains a verified digital identity, a tamper-proof citizen ID card, and the ability to be verified instantly by banks, employers, landlords and government agencies. Registration is free of charge.',
+                'category' => 'general',
+                'order'    => 4,
+            ],
             // verification
             [
-                'question' => 'What is the staff verification process?',
-                'answer'   => 'Staff verification involves confirming the identity, qualifications, and employment status of each worker. HR Officers review submitted documents and either approve or request further information before granting verified status.',
+                'question' => 'What is the citizen verification process?',
+                'answer'   => 'Citizen verification involves confirming the identity, residential address, and residency status of each registered citizen. Registry Officers review submitted information and documents and either approve or request further information before granting verified status.',
                 'category' => 'verification',
                 'order'    => 1,
             ],
             [
                 'question' => 'How long does verification take?',
-                'answer'   => 'Verification typically takes 5–10 working days after all required documents have been submitted. Complex cases may take longer. You will be notified via email once your status changes.',
+                'answer'   => 'Verification typically takes 5–10 working days after all required information has been submitted and confirmed. You will be notified via email and your citizen portal once your verification status changes.',
                 'category' => 'verification',
                 'order'    => 2,
             ],
             [
                 'question' => 'What documents are required for verification?',
-                'answer'   => 'Required documents include: valid national ID (NIN slip or voter card), original appointment letter, academic certificates, passport photograph, and a signed staff undertaking form available from HR.',
+                'answer'   => 'Required documents include: a valid national ID (NIN slip or voter card), a recent passport photograph, and proof of residential address within Ayobo Ipaja LCDA (utility bill, tenancy agreement, or any official document showing your current address).',
                 'category' => 'verification',
                 'order'    => 3,
             ],
+            [
+                'question' => 'Can anyone verify my identity using the platform?',
+                'answer'   => 'Yes. Once your record is approved, any authorised party — including banks, employers, landlords, security agencies, and members of the public — can verify your identity by scanning the QR code on your citizen ID card or searching the public verification portal by your Citizen ID, name, NIN, or phone number.',
+                'category' => 'verification',
+                'order'    => 4,
+            ],
             // id-card
             [
-                'question' => 'How do I obtain my digital ID card?',
-                'answer'   => 'Once your verification status is approved, your digital ID card is generated automatically. You can download it from your profile dashboard under "My ID Card". Physical cards are issued by the Administration office.',
+                'question' => 'How do I obtain my digital citizen ID card?',
+                'answer'   => 'Once your verification status is approved, your digital citizen ID card is generated automatically. You can download it from your citizen portal under "My ID Card". Physical cards can be collected from the LCDA Administration office.',
                 'category' => 'id-card',
                 'order'    => 1,
             ],
             [
-                'question' => 'When does my ID card expire?',
-                'answer'   => 'ID cards are valid for two (2) years from the date of issue. You will receive a notification email 30 days before expiry reminding you to apply for renewal.',
+                'question' => 'When does my citizen ID card expire?',
+                'answer'   => 'Citizen ID cards are valid for three (3) years from the date of issue. You will receive a notification email 30 days before expiry reminding you to apply for renewal through your citizen portal or at the Registry Office.',
                 'category' => 'id-card',
                 'order'    => 2,
             ],
-            // employment
             [
-                'question' => 'How do I update my employment details?',
-                'answer'   => 'Employment details such as designation, department, and grade level can only be updated by HR Officers or the Super Admin. Contact the HR Department with supporting documents to request any changes.',
-                'category' => 'employment',
+                'question' => 'What information is on the citizen ID card?',
+                'answer'   => 'Each citizen ID card displays your full name, photograph, unique Citizen ID number, residential address, ward, LCDA, card issue and expiry dates, and a QR code that links directly to your live verification profile.',
+                'category' => 'id-card',
+                'order'    => 3,
+            ],
+            // registration
+            [
+                'question' => 'How do I update my residential address or personal details?',
+                'answer'   => 'You can request updates to your personal information and address by logging in to your citizen portal. Certain details such as your verified residential address require supporting documentation and approval by a Registry Officer.',
+                'category' => 'registration',
                 'order'    => 1,
             ],
             [
-                'question' => 'What should I do if I am transferred to another department?',
-                'answer'   => 'Upon transfer, your unit head or HR Officer will update your departmental assignment in the system. Ensure you collect a transfer letter and submit it to the HR Department within 5 working days of the transfer.',
-                'category' => 'employment',
+                'question' => 'What should I do if I move to a different address within the LCDA?',
+                'answer'   => 'If you move to a new address within Ayobo Ipaja LCDA, log in to your citizen portal and submit a change-of-address request with supporting proof of your new address. A Registry Officer will review and update your record, and a new ID card reflecting your updated address will be generated.',
+                'category' => 'registration',
                 'order'    => 2,
             ],
         ];
@@ -165,37 +183,37 @@ class ContentSeeder extends Seeder
                 'id'               => 1,
                 'title'            => 'About Us',
                 'slug'             => 'about',
-                'meta_title'       => 'About – Kano Municipal LGA Workforce Identity System',
-                'meta_description' => 'Learn about the Kano Municipal LGA Workforce Identity System and its mandate.',
+                'meta_title'       => 'About – Ayobo Ipaja LCDA Citizen Identity & Verification Platform',
+                'meta_description' => 'Learn about the Ayobo Ipaja LCDA Citizen Identity & Verification Database Platform and its mandate.',
                 'is_published'     => true,
-                'content'          => '<h2>About the Kano Municipal LGA Workforce Identity System</h2><p>The Kano Municipal Local Government Area Workforce Identity System (LGADB) is a centralized platform established to digitise the management, verification, and identification of all workers employed under the Kano Municipal LGA.</p><p>Our mission is to ensure transparency, accountability, and efficiency in workforce management across all departments and units of the local government. The system enables the issuance of tamper-proof digital ID cards, real-time verification of staff status, and comprehensive reporting for decision-makers.</p><h3>Our Mandate</h3><ul><li>Maintain an accurate and up-to-date register of all LGA employees.</li><li>Issue digital and physical staff identity cards.</li><li>Facilitate the verification and authentication of worker credentials.</li><li>Support HR operations including records management and payroll integration.</li></ul>',
+                'content'          => '<h2>About the Ayobo Ipaja Citizen Identity &amp; Verification Platform</h2><p>The Ayobo Ipaja Local Council Development Area Citizen Identity &amp; Verification Database Platform is a secure, web-based digital system established to register, manage and verify the identity of every citizen and resident of Ayobo Ipaja LCDA — not a select group, but the general public in its entirety.</p><p>Developed by Skillscore IT Solutions &amp; Training and deployed for Ayobo Ipaja Local Council Development Area, Lagos State, the platform replaces scattered paper records and unverifiable residency claims with a single, tamper-proof digital database accessible from any internet-connected device at any time.</p><h3>Our Mandate</h3><ul><li>Maintain an accurate and up-to-date digital register of all citizens and residents of Ayobo Ipaja LCDA.</li><li>Issue secure, tamper-proof digital and physical citizen identity cards.</li><li>Enable instant, public verification of any registered citizen\'s identity and residency status.</li><li>Support accurate targeting of social interventions, palliatives and government programmes to genuine citizens.</li><li>Provide ward-level population and household data to guide infrastructure and service delivery planning.</li></ul><h3>Our Address</h3><p>Ayobo Ipaja Local Council Development Area<br>Igbogila, Ipaja Road, Lagos State, Nigeria.</p>',
             ],
             [
                 'id'               => 2,
                 'title'            => 'Privacy Policy',
                 'slug'             => 'privacy-policy',
-                'meta_title'       => 'Privacy Policy – LGADB',
-                'meta_description' => 'Read the privacy policy for the Kano Municipal LGA Workforce Identity System.',
+                'meta_title'       => 'Privacy Policy – Ayobo Ipaja LCDA Citizen Platform',
+                'meta_description' => 'Read the privacy policy for the Ayobo Ipaja LCDA Citizen Identity & Verification Platform.',
                 'is_published'     => true,
-                'content'          => '<h2>Privacy Policy</h2><p><em>Last updated: ' . now()->format('F Y') . '</em></p><p>Kano Municipal LGA ("we", "us", or "our") is committed to protecting the personal information of all staff members registered on this platform. This Privacy Policy explains how we collect, use, and safeguard your data.</p><h3>Information We Collect</h3><p>We collect personal information including your name, date of birth, contact details, national identification number, employment history, and biometric data (photograph and signature) solely for the purpose of workforce management and identity verification.</p><h3>How We Use Your Information</h3><ul><li>To generate and issue your official staff ID card.</li><li>To verify your employment status for administrative purposes.</li><li>To maintain accurate staff records for payroll and HR operations.</li></ul><h3>Data Security</h3><p>All personal data is stored on secured servers within Nigeria and is accessible only to authorised personnel. We apply industry-standard encryption and access controls to protect your information.</p><h3>Contact</h3><p>For privacy-related enquiries, contact the Data Protection Officer at the HR Department, Kano Municipal LGA Secretariat.</p>',
+                'content'          => '<h2>Privacy Policy</h2><p><em>Last updated: ' . now()->format('F Y') . '</em></p><p>Ayobo Ipaja Local Council Development Area ("we", "us", or "our") is committed to protecting the personal information of all citizens registered on this platform. This Privacy Policy explains how we collect, use, and safeguard your data in line with the Nigeria Data Protection Act (NDPA) 2023.</p><h3>Information We Collect</h3><p>We collect personal information including your full name, date of birth, contact details, residential address, National Identification Number (NIN), residency status, and biometric data (photograph) solely for the purpose of citizen identity management and residency verification.</p><h3>How We Use Your Information</h3><ul><li>To generate and issue your official citizen ID card bearing your verified residential address.</li><li>To enable authorised parties to verify your identity and residency status.</li><li>To support the accurate targeting of government social intervention programmes.</li><li>To maintain accurate citizen records for planning and administrative purposes.</li></ul><h3>Who Can See Your Information</h3><p>Access is tiered by role. The general public can verify your name, photo, ward and residency status. Government agencies and security operatives may access additional detail as authorised. Your full record is never disclosed to the general public by default.</p><h3>Data Security</h3><p>All personal data is stored on secured servers within Nigeria and is accessible only to authorised personnel. We apply industry-standard encryption and access controls to protect your information.</p><h3>Contact</h3><p>For privacy-related enquiries, contact the Data Protection Officer at the LCDA Registry Office, Ayobo Ipaja Local Council Development Area, Igbogila, Ipaja Road, Lagos.</p>',
             ],
             [
                 'id'               => 3,
                 'title'            => 'Terms of Service',
                 'slug'             => 'terms-of-service',
-                'meta_title'       => 'Terms of Service – LGADB',
-                'meta_description' => 'Terms of service governing the use of the Kano Municipal LGA Workforce Identity System.',
+                'meta_title'       => 'Terms of Service – Ayobo Ipaja LCDA Citizen Platform',
+                'meta_description' => 'Terms of service governing the use of the Ayobo Ipaja LCDA Citizen Identity & Verification Platform.',
                 'is_published'     => true,
-                'content'          => '<h2>Terms of Service</h2><p><em>Last updated: ' . now()->format('F Y') . '</em></p><p>By accessing and using the LGADB Workforce Identity System, you agree to be bound by the following terms and conditions.</p><h3>Acceptable Use</h3><ul><li>You must use this system solely for legitimate workforce management purposes.</li><li>You must not attempt to access accounts or records that are not assigned to you.</li><li>You must not share your login credentials with any other person.</li><li>You must not introduce malicious code or attempt to compromise system security.</li></ul><h3>Accuracy of Information</h3><p>You are responsible for ensuring that all information you provide is accurate and up to date. Providing false information may result in disciplinary action in accordance with the public service rules.</p><h3>Account Security</h3><p>You are responsible for maintaining the confidentiality of your username and password. Report any suspected unauthorised access to the IT support desk immediately.</p><h3>Termination</h3><p>Access to this system may be suspended or terminated without notice if there is a breach of these terms, or upon separation from the local government service.</p>',
+                'content'          => '<h2>Terms of Service</h2><p><em>Last updated: ' . now()->format('F Y') . '</em></p><p>By accessing and using the Ayobo Ipaja Citizen Identity &amp; Verification Platform, you agree to be bound by the following terms and conditions.</p><h3>Acceptable Use</h3><ul><li>You must use this platform solely for legitimate citizen identity registration and verification purposes.</li><li>You must not attempt to access accounts or records that are not assigned to you.</li><li>You must not share your login credentials with any other person.</li><li>You must not introduce malicious code or attempt to compromise system security.</li><li>You must not use the verification portal to harass, stalk, or unlawfully obtain information about any citizen.</li></ul><h3>Accuracy of Information</h3><p>You are responsible for ensuring that all information you provide during registration is accurate and up to date. Providing false information, including a false residential address, is an offence and may result in cancellation of your registration and referral to appropriate authorities.</p><h3>Account Security</h3><p>You are responsible for maintaining the confidentiality of your username and password. Report any suspected unauthorised access to the LCDA Registry Office immediately.</p><h3>Termination</h3><p>Access to this platform may be suspended or terminated without notice if there is a breach of these terms or if your registration record is found to contain false information.</p>',
             ],
             [
                 'id'               => 4,
                 'title'            => 'Contact Us',
                 'slug'             => 'contact',
-                'meta_title'       => 'Contact – Kano Municipal LGA',
-                'meta_description' => 'Get in touch with the Kano Municipal LGA HR Department for assistance.',
+                'meta_title'       => 'Contact – Ayobo Ipaja LCDA Citizen Identity Platform',
+                'meta_description' => 'Get in touch with the Ayobo Ipaja LCDA Citizen Registry Office for assistance.',
                 'is_published'     => true,
-                'content'          => '<h2>Contact Us</h2><p>If you have questions or require assistance with the LGADB Workforce Identity System, please reach us through any of the channels below.</p><h3>HR Department</h3><p><strong>Address:</strong> Administration & HR Department, Kano Municipal LGA Secretariat, Hospital Road, Kano State, Nigeria.<br><strong>Phone:</strong> +234 801 234 5678<br><strong>Email:</strong> hr@lgadb.gov.ng<br><strong>Office Hours:</strong> Monday – Friday, 8:00 AM – 4:00 PM</p><h3>IT Support</h3><p>For technical issues with the system, email: <a href="mailto:it@lgadb.gov.ng">it@lgadb.gov.ng</a></p>',
+                'content'          => '<h2>Contact Us</h2><p>If you have questions or require assistance with the Ayobo Ipaja Citizen Identity &amp; Verification Platform, please reach us through any of the channels below.</p><h3>LCDA Citizen Registry Office</h3><p><strong>Address:</strong> Ayobo Ipaja Local Council Development Area, Igbogila, Ipaja Road, Lagos State, Nigeria.<br><strong>Phone:</strong> +234 801 234 5678<br><strong>Email:</strong> registry@ayoboipajalgadb.gov.ng<br><strong>Office Hours:</strong> Monday – Friday, 8:00 AM – 4:00 PM</p><h3>IT Support</h3><p>For technical issues with the platform, email: <a href="mailto:support@ayoboipajalgadb.gov.ng">support@ayoboipajalgadb.gov.ng</a></p><h3>Fraud Hotline</h3><p>To report a fraudulent citizen ID card or suspected identity fraud, call our hotline or use the fraud report form on this page.</p>',
             ],
         ];
 
@@ -218,25 +236,25 @@ class ContentSeeder extends Seeder
 <body class="id-card front">
   <div class="card-header">
     <div class="logo-area">
-      <img src="{{ org_logo }}" alt="LGA Logo" class="logo" onerror="this.style.display='none'">
+      <img src="{{ org_logo }}" alt="LCDA Logo" class="logo" onerror="this.style.display='none'">
     </div>
     <div class="org-details">
-      <h1 class="org-name">{{ org_name }}</h1>
-      <p class="org-subtitle">Kano State, Nigeria</p>
-      <p class="card-label">STAFF IDENTITY CARD</p>
+      <h1 class="org-name">AYOBO IPAJA LCDA</h1>
+      <p class="org-subtitle">Lagos State, Nigeria</p>
+      <p class="card-label">CITIZEN IDENTITY CARD</p>
     </div>
   </div>
   <div class="card-body">
     <div class="photo-section">
-      <img src="{{ worker_photo }}" alt="Staff Photo" class="worker-photo" onerror="this.style.background='#ccc'">
+      <img src="{{ citizen_photo }}" alt="Citizen Photo" class="citizen-photo" onerror="this.style.background='#ccc'">
     </div>
     <div class="details-section">
-      <p class="worker-name">{{ worker_name }}</p>
+      <p class="citizen-name">{{ citizen_name }}</p>
       <table class="info-table">
-        <tr><td class="label">Staff No:</td><td class="value">{{ staff_number }}</td></tr>
-        <tr><td class="label">Department:</td><td class="value">{{ department }}</td></tr>
-        <tr><td class="label">Designation:</td><td class="value">{{ designation }}</td></tr>
-        <tr><td class="label">Grade Level:</td><td class="value">{{ grade_level }}</td></tr>
+        <tr><td class="label">Citizen ID:</td><td class="value">{{ citizen_id }}</td></tr>
+        <tr><td class="label">Occupation:</td><td class="value">{{ designation }}</td></tr>
+        <tr><td class="label">Ward:</td><td class="value">{{ ward }}</td></tr>
+        <tr><td class="label">Address:</td><td class="value">{{ residential_address }}</td></tr>
       </table>
     </div>
   </div>
@@ -253,7 +271,7 @@ HTML;
 <head><meta charset="UTF-8"></head>
 <body class="id-card back">
   <div class="back-header">
-    <p class="back-title">KANO MUNICIPAL LOCAL GOVERNMENT AREA</p>
+    <p class="back-title">AYOBO IPAJA LOCAL COUNCIL DEVELOPMENT AREA</p>
   </div>
   <div class="back-body">
     <div class="qr-section">
@@ -273,9 +291,9 @@ HTML;
     <p>{{ emergency_contact_name }} &nbsp; {{ emergency_contact_phone }}</p>
   </div>
   <div class="back-footer">
-    <p>If found, please return to: HR Department, Kano Municipal LGA Secretariat, Kano.</p>
-    <p>Tel: +234 801 234 5678 &nbsp;|&nbsp; Email: hr@lgadb.gov.ng</p>
-    <p class="verify-text">Verify at: https://lgadb.gov.ng/verify/{{ verification_code }}</p>
+    <p>If found, please return to: LCDA Registry Office, Igbogila, Ipaja Road, Lagos.</p>
+    <p>Tel: +234 801 234 5678</p>
+    <p class="verify-text">Verify at: {{ verification_url }}</p>
   </div>
 </body>
 </html>
@@ -284,34 +302,34 @@ HTML;
         $css = <<<'CSS'
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
 body.id-card { width: 85.6mm; height: 54mm; background: #fff; color: #111; font-size: 7pt; overflow: hidden; }
-.card-header { display: flex; align-items: center; background: #006400; color: #fff; padding: 4px 6px; gap: 6px; }
+.card-header { display: flex; align-items: center; background: #064e3b; color: #fff; padding: 4px 6px; gap: 6px; }
 .logo { width: 32px; height: 32px; object-fit: contain; }
 .org-name { font-size: 8pt; font-weight: bold; line-height: 1.2; }
 .org-subtitle { font-size: 6pt; }
 .card-label { font-size: 7pt; font-weight: bold; letter-spacing: 0.5px; margin-top: 2px; }
 .card-body { display: flex; padding: 4px 6px; gap: 6px; flex: 1; }
-.worker-photo { width: 28mm; height: 30mm; object-fit: cover; border: 1px solid #ccc; }
-.worker-name { font-size: 8pt; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
+.citizen-photo { width: 28mm; height: 30mm; object-fit: cover; border: 1px solid #ccc; }
+.citizen-name { font-size: 8pt; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
 .info-table td { padding: 1px 2px; vertical-align: top; }
 .info-table .label { font-weight: bold; white-space: nowrap; color: #555; width: 65px; }
 .info-table .value { font-size: 7pt; }
-.card-footer { background: #006400; color: #fff; text-align: center; padding: 2px; font-size: 6pt; }
-.back-header { background: #006400; color: #fff; text-align: center; padding: 3px; }
+.card-footer { background: #064e3b; color: #fff; text-align: center; padding: 2px; font-size: 6pt; }
+.back-header { background: #064e3b; color: #fff; text-align: center; padding: 3px; }
 .back-title { font-size: 7pt; font-weight: bold; }
 .back-body { display: flex; padding: 4px 6px; gap: 6px; }
 .qr-code { width: 22mm; height: 22mm; object-fit: contain; }
 .verification-code { font-size: 6pt; text-align: center; margin-top: 2px; font-weight: bold; letter-spacing: 1px; }
-.emergency-section { background: #f5f5f5; padding: 3px 6px; }
-.emergency-label { font-weight: bold; font-size: 6pt; color: #c00; }
+.emergency-section { background: #f0fdf4; padding: 3px 6px; }
+.emergency-label { font-weight: bold; font-size: 6pt; color: #064e3b; }
 .back-footer { padding: 2px 6px; font-size: 5.5pt; color: #555; text-align: center; }
-.verify-text { font-weight: bold; color: #006400; }
+.verify-text { font-weight: bold; color: #064e3b; }
 CSS;
 
         DB::table('id_card_templates')->upsert(
             [
                 [
                     'id'         => 1,
-                    'name'       => 'Default LGA Template',
+                    'name'       => 'Ayobo Ipaja LCDA Citizen ID Template',
                     'front_html' => $frontHtml,
                     'back_html'  => $backHtml,
                     'css'        => $css,
