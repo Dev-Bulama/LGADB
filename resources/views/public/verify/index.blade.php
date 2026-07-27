@@ -164,7 +164,7 @@
     <footer class="border-t border-gray-200 py-4 px-6 text-center text-xs text-gray-400">
         &copy; {{ date('Y') }} {{ $appSettings['org_name'] ?? config('app.name') }}
         &nbsp;&bull;&nbsp;
-        <a href="{{ route('verify.index') }}" class="hover:text-gray-600">Verify Staff</a>
+        <a href="{{ route('verify.index') }}" class="hover:text-gray-600">Verify Citizen</a>
         &nbsp;&bull;&nbsp;
         <a href="{{ route('faqs') }}" class="hover:text-gray-600">FAQs</a>
         &nbsp;&bull;&nbsp;

@@ -104,7 +104,7 @@
                             <option value="">Select a subject</option>
                             <option value="verification">Citizen Verification Enquiry</option>
                             <option value="id_card">ID Card Issue</option>
-                            <option value="portal">Worker Portal Access</option>
+                            <option value="portal">Citizen Portal Access</option>
                             <option value="fraud">Report Fraudulent ID</option>
                             <option value="general">General Enquiry</option>
                             <option value="other">Other</option>

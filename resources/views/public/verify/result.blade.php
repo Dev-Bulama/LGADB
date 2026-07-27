@@ -21,8 +21,8 @@
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
             <div>
-                <p class="text-green-800 font-semibold">Verified Staff Record Found</p>
-                <p class="text-green-700 text-sm">This staff member is a verified and approved LGA worker.</p>
+                <p class="text-green-800 font-semibold">Verified Citizen Record Found</p>
+                <p class="text-green-700 text-sm">This citizen is verified and approved in the Alimosho LGA database.</p>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
                     </div>
-                    <span class="text-white font-bold">VERIFIED STAFF RECORD</span>
+                    <span class="text-white font-bold">VERIFIED CITIZEN RECORD</span>
                 </div>
                 <span class="bg-green-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full uppercase">✓ Approved</span>
             </div>
@@ -59,11 +59,11 @@
                     <!-- Info -->
                     <div class="flex-1 min-w-0">
                         <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ $worker->full_name }}</h2>
-                        <p class="text-green-700 font-semibold mb-3">{{ $worker->designation ?? 'Staff Member' }}</p>
+                        <p class="text-green-700 font-semibold mb-3">{{ $worker->designation ?? 'Alimosho LGA Citizen' }}</p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                             <div>
-                                <span class="text-gray-400 text-xs uppercase font-semibold">Staff Number</span>
+                                <span class="text-gray-400 text-xs uppercase font-semibold">Citizen ID</span>
                                 <p class="text-gray-800 font-mono font-bold">{{ $worker->staff_number }}</p>
                             </div>
                             <div>
@@ -75,7 +75,7 @@
                                 <p class="text-gray-800">{{ $worker->unit?->name ?? $worker->office?->name ?? 'N/A' }}</p>
                             </div>
                             <div>
-                                <span class="text-gray-400 text-xs uppercase font-semibold">Employment Type</span>
+                                <span class="text-gray-400 text-xs uppercase font-semibold">Residency Type</span>
                                 <p class="text-gray-800">{{ $worker->employment_type?->label() ?? 'N/A' }}</p>
                             </div>
                             <div>
@@ -112,8 +112,8 @@
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
             </svg>
             <div>
-                <p class="text-red-800 font-semibold">No Verified Staff Record Found</p>
-                <p class="text-red-700 text-sm">The search query "<strong>{{ $query ?? '' }}</strong>" did not match any approved staff records.</p>
+                <p class="text-red-800 font-semibold">No Verified Citizen Record Found</p>
+                <p class="text-red-700 text-sm">The search query "<strong>{{ $query ?? '' }}</strong>" did not match any approved citizen records.</p>
             </div>
         </div>
 
@@ -125,7 +125,7 @@
             </div>
             <h2 class="text-xl font-bold text-gray-800 mb-2">No Record Found</h2>
             <p class="text-gray-500 text-sm max-w-md mx-auto mb-6">
-                No verified LGA staff member matched your search. Please check the information and try again.
+                No verified citizen record matched your search. Please check the information and try again.
                 If you believe this is an error, please contact the LGA office.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">

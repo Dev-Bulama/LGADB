@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <!-- Employment Info -->
+    <!-- Registration Info -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h2 class="font-bold text-gray-900 mb-4 flex items-center">

@@ -11,12 +11,12 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             // General
-            ['key' => 'org_name',    'value' => 'Alimosho Local Government Authority', 'group' => 'general', 'description' => 'Organisation display name'],
+            ['key' => 'org_name',    'value' => 'Ayobo Ipaja Local Council Development Area', 'group' => 'general', 'description' => 'Organisation display name'],
             ['key' => 'lga_name',    'value' => 'Alimosho LGA',             'group' => 'general', 'description' => 'Short LGA name used in certificates and ID cards'],
             ['key' => 'lga_state',   'value' => 'Lagos State',              'group' => 'general', 'description' => 'State the LGA belongs to'],
             ['key' => 'org_phone',   'value' => env('LGA_PHONE', '+234 800 000 0000'), 'group' => 'general', 'description' => 'Main contact phone number'],
             ['key' => 'org_email',   'value' => env('LGA_EMAIL', 'info@alimosholgalagos.gov.ng'), 'group' => 'general', 'description' => 'Public contact email'],
-            ['key' => 'org_address', 'value' => env('LGA_ADDRESS', 'LGA Secretariat, Alimosho, Lagos State, Nigeria'), 'group' => 'general', 'description' => 'Physical office address'],
+            ['key' => 'org_address', 'value' => env('LGA_ADDRESS', 'Ayobo Ipaja Local Council Development Area, Igbogila, Ipaja Road, Lagos'), 'group' => 'general', 'description' => 'Physical office address'],
             ['key' => 'org_website', 'value' => 'https://alimosholgalagos.gov.ng', 'group' => 'general', 'description' => 'Official website URL'],
 
             // ID Card

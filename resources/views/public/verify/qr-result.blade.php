@@ -12,7 +12,7 @@
             </svg>
         </div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-white">QR Code Verification</h1>
-        <p class="text-green-100 mt-2 text-sm">Scanned from staff ID card</p>
+        <p class="text-green-100 mt-2 text-sm">Scanned from citizen ID card</p>
     </div>
 </div>
 
@@ -25,14 +25,14 @@
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
             <div>
-                <p class="text-green-800 font-semibold">QR Code is Valid — Verified LGA Staff</p>
-                <p class="text-green-700 text-sm">This ID card belongs to a verified and approved member of LGA workforce.</p>
+                <p class="text-green-800 font-semibold">QR Code is Valid — Verified LGA Citizen</p>
+                <p class="text-green-700 text-sm">This ID card belongs to a verified and approved citizen of Ayobo Ipaja LCDA.</p>
             </div>
         </div>
 
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div class="gov-gradient px-6 py-3">
-                <span class="text-white font-semibold text-sm">VERIFIED WORKFORCE IDENTITY</span>
+                <span class="text-white font-semibold text-sm">VERIFIED CITIZEN IDENTITY</span>
             </div>
             <div class="p-6 flex flex-col sm:flex-row gap-6 items-start">
                 @if($worker->profile_photo_url)
@@ -47,10 +47,10 @@
                 @endif
                 <div class="flex-1">
                     <h2 class="text-2xl font-extrabold text-gray-900">{{ $worker->full_name }}</h2>
-                    <p class="text-green-700 font-medium mb-3">{{ $worker->designation ?? 'LGA Staff' }}</p>
+                    <p class="text-green-700 font-medium mb-3">{{ $worker->designation ?? 'Alimosho LGA Citizen' }}</p>
                     <dl class="grid grid-cols-2 gap-3 text-sm">
                         <div>
-                            <dt class="text-gray-400 text-xs uppercase font-semibold">Staff Number</dt>
+                            <dt class="text-gray-400 text-xs uppercase font-semibold">Citizen ID</dt>
                             <dd class="font-mono font-bold text-gray-800">{{ $worker->staff_number }}</dd>
                         </div>
                         <div>
@@ -82,7 +82,7 @@
             </svg>
             <div>
                 <p class="text-red-800 font-semibold">Invalid or Unrecognised QR Code</p>
-                <p class="text-red-700 text-sm">This QR code does not match any verified staff record in our system.</p>
+                <p class="text-red-700 text-sm">This QR code does not match any verified citizen record in our system.</p>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
             </div>
             <h2 class="text-xl font-bold text-gray-800 mb-2">QR Code Not Valid</h2>
             <p class="text-gray-500 text-sm max-w-sm mx-auto mb-2">
-                The scanned QR code (hash: <code class="text-xs bg-gray-100 px-1 rounded">{{ isset($hash) ? substr($hash, 0, 16) : '...' }}...</code>) does not correspond to any approved staff member.
+                The scanned QR code (hash: <code class="text-xs bg-gray-100 px-1 rounded">{{ isset($hash) ? substr($hash, 0, 16) : '...' }}...</code>) does not correspond to any approved citizen.
             </p>
             <p class="text-red-600 text-sm font-medium mb-6">This may indicate a fraudulent or tampered ID card.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">

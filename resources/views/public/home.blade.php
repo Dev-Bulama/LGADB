@@ -283,14 +283,14 @@ function homeSearch() {
 <!-- Call to Action -->
 <section class="gov-gradient py-16">
     <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-extrabold text-white mb-4">Are You an LGA Worker?</h2>
-        <p class="text-green-100 text-lg mb-8">Log in to your worker portal to download your ID card, update your profile, and access your employment records.</p>
+        <h2 class="text-3xl font-extrabold text-white mb-4">Are You a Registered Citizen?</h2>
+        <p class="text-green-100 text-lg mb-8">Log in to your citizen portal to download your ID card, update your profile, and access your registration records.</p>
         <a href="{{ route('login') }}"
            class="inline-flex items-center bg-white text-green-800 font-bold px-8 py-3 rounded-lg hover:bg-green-50 transition shadow-lg text-lg">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
             </svg>
-            Access Worker Portal
+            Access Citizen Portal
         </a>
     </div>
 </section>

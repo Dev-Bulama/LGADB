@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Worker Portal') — {{ config('app.name') }}</title>
+    <title>@yield('title', 'Citizen Portal') — {{ config('app.name') }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <p class="text-white font-bold text-sm leading-tight">{{ config('app.name') }}</p>
-                <p class="text-green-300 text-xs">Worker Portal</p>
+                <p class="text-green-300 text-xs">Citizen Portal</p>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span>Employment History</span>
+                <span>Registration History</span>
             </a>
             <a href="{{ route('portal.notifications') }}"
                class="sidebar-link {{ request()->routeIs('portal.notifications') ? 'active' : '' }}">
@@ -103,7 +103,7 @@
                     <span class="text-green-900 font-bold text-xs">{{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}</span>
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="text-white text-sm font-medium truncate">{{ Auth::user()->name ?? 'Worker' }}</p>
+                    <p class="text-white text-sm font-medium truncate">{{ Auth::user()->name ?? 'Citizen' }}</p>
                     <p class="text-green-300 text-xs truncate">{{ Auth::user()->email ?? '' }}</p>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                 </button>
 
                 <div class="flex-1 lg:flex-none">
-                    <h1 class="text-lg font-semibold text-gray-800">@yield('page-title', 'Worker Portal')</h1>
+                    <h1 class="text-lg font-semibold text-gray-800">@yield('page-title', 'Citizen Portal')</h1>
                 </div>
 
                 <div class="flex items-center space-x-3" x-data="{ dropOpen: false }">
@@ -145,7 +145,7 @@
                             <div class="w-6 h-6 bg-green-700 rounded-full flex items-center justify-center">
                                 <span class="text-white text-xs font-bold">{{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}</span>
                             </div>
-                            <span class="hidden sm:inline">{{ Auth::user()->name ?? 'Worker' }}</span>
+                            <span class="hidden sm:inline">{{ Auth::user()->name ?? 'Citizen' }}</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
-@section('title', 'Worker Login')
-@section('description', 'Secure login portal for LGA staff members.')
+@section('title', 'Citizen Login')
+@section('description', 'Secure login portal for Alimosho LGA citizens.')
 
 @section('content')
 
@@ -13,14 +13,14 @@
             <div class="w-16 h-16 gov-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <span class="text-white font-extrabold text-lg">LGA</span>
             </div>
-            <h1 class="text-3xl font-extrabold text-gray-900">Worker Portal</h1>
+            <h1 class="text-3xl font-extrabold text-gray-900">Citizen Portal</h1>
             <p class="text-gray-500 text-sm mt-2">{{ config('app.name') }}</p>
         </div>
 
         {{-- Notice --}}
         <div class="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
             <p class="text-green-800 text-xs font-semibold">
-                This portal is for authorised LGA staff members only.
+                This portal is for registered Alimosho LGA citizens only.
             </p>
         </div>
 
@@ -114,7 +114,7 @@
 
         <div class="text-center space-y-2">
             <p class="text-sm text-gray-600">
-                New staff member?
+                New citizen?
                 <a href="{{ route('register') }}" class="text-green-700 font-semibold hover:underline">Register here</a>
             </p>
             <p class="text-xs text-gray-400">

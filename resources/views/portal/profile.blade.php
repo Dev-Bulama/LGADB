@@ -29,7 +29,7 @@
             <div>
                 <h2 class="text-2xl font-bold text-gray-900">{{ $worker?->full_name ?? $user->name }}</h2>
                 <p class="text-green-600 font-medium">{{ $worker?->designation ?? 'No designation' }}</p>
-                <p class="text-gray-500 text-sm">{{ $worker?->staff_number ?? 'Pending assignment' }}</p>
+                <p class="text-gray-500 text-sm">{{ $worker?->staff_number ?? 'Pending assignment' }} — Citizen ID</p>
                 @if($worker)
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1
                     {{ $worker->verification_status?->value === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
@@ -41,15 +41,15 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Employment Info (Read-only) -->
+        <!-- Registration Info (Read-only) -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Employment Information</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Registration Information</h3>
             <dl class="space-y-3">
                 <div><dt class="text-sm text-gray-500">Department</dt><dd class="font-medium">{{ $worker?->department?->name ?? '—' }}</dd></div>
                 <div><dt class="text-sm text-gray-500">Unit</dt><dd class="font-medium">{{ $worker?->unit?->name ?? '—' }}</dd></div>
                 <div><dt class="text-sm text-gray-500">Office</dt><dd class="font-medium">{{ $worker?->office?->name ?? '—' }}</dd></div>
-                <div><dt class="text-sm text-gray-500">Employment Type</dt><dd class="font-medium">{{ $worker?->employment_type?->label() ?? '—' }}</dd></div>
-                <div><dt class="text-sm text-gray-500">Employment Date</dt><dd class="font-medium">{{ $worker?->employment_date?->format('d M Y') ?? '—' }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Residency Type</dt><dd class="font-medium">{{ $worker?->employment_type?->label() ?? '—' }}</dd></div>
+                <div><dt class="text-sm text-gray-500">Registration Date</dt><dd class="font-medium">{{ $worker?->employment_date?->format('d M Y') ?? '—' }}</dd></div>
                 <div><dt class="text-sm text-gray-500">Grade Level / Step</dt><dd class="font-medium">{{ $worker?->grade_level ?? '—' }} / {{ $worker?->step ?? '—' }}</dd></div>
             </dl>
         </div>

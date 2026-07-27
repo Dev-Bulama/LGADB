@@ -1,15 +1,15 @@
 @extends('layouts.portal')
 
-@section('title', 'Employment History')
-@section('page-title', 'Employment History')
+@section('title', 'Registration History')
+@section('page-title', 'Registration History')
 
 @section('content')
 
 <div class="space-y-6">
 
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-        <h2 class="font-bold text-gray-900 mb-1">Employment Timeline</h2>
-        <p class="text-sm text-gray-400">A record of your employment history within the LGA.</p>
+        <h2 class="font-bold text-gray-900 mb-1">Registration Timeline</h2>
+        <p class="text-sm text-gray-400">A record of your registration history with Alimosho LGA.</p>
     </div>
 
     {{-- $worker and $histories are passed from WorkerPortalController --}}
@@ -22,7 +22,7 @@
                 </svg>
             </div>
             <h3 class="font-semibold text-gray-700 mb-1">No History Records</h3>
-            <p class="text-sm text-gray-400">Employment history records will appear here once they are entered by HR.</p>
+            <p class="text-sm text-gray-400">Registration history records will appear here once they are entered by the LGA office.</p>
         </div>
     @else
         <div class="relative">
