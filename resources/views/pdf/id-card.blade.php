@@ -4,278 +4,546 @@
 <meta charset="UTF-8">
 <title>ID Card — {{ $worker->full_name }}</title>
 <style>
-* { margin: 0; padding: 0; }
-
-/* Paper = 242.65pt × 153.07pt (CR80 85.6mm × 54mm at 72dpi) */
-/* Each card-side fills the page exactly */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     width: 242.65pt;
+    background: #fff;
 }
 
-/* ─── FRONT ─── */
+/* ══════════════════════════════════════════
+   FRONT
+══════════════════════════════════════════ */
 .front {
     width: 242.65pt;
     height: 153.07pt;
-    background-color: #065f46;
-    color: #ffffff;
+    background: #ffffff;
     overflow: hidden;
     page-break-after: always;
+    position: relative;
 }
 
-/* Header bar */
-.hdr {
-    background-color: #043a28;
-    width: 242.65pt;
-    padding: 5pt 8pt 4pt 8pt;
-    border-bottom: 1pt solid #a7f3d0;
+/* ── Top header band ── */
+.f-header {
+    background: #064e3b;
+    width: 100%;
+    padding: 5pt 7pt 4pt 7pt;
+    display: table;
 }
-.hdr table { width: 100%; border-collapse: collapse; }
-.hdr td { padding: 0; vertical-align: middle; }
-.logo-circle {
-    width: 20pt;
-    height: 20pt;
-    background-color: #ffffff;
-    border-radius: 10pt;
+.f-header-logo {
+    display: table-cell;
+    width: 22pt;
+    vertical-align: middle;
+}
+.f-logo-circle {
+    width: 18pt;
+    height: 18pt;
+    border-radius: 9pt;
+    background: #ffffff;
     text-align: center;
-    line-height: 20pt;
+    line-height: 18pt;
+    font-size: 5pt;
+    font-weight: bold;
+    color: #064e3b;
 }
-.logo-text { color: #043a28; font-size: 6pt; font-weight: bold; }
-.hdr-org { font-size: 8pt; font-weight: bold; color: #ffffff; letter-spacing: 0.3pt; }
-.hdr-sub { font-size: 5.5pt; color: #a7f3d0; margin-top: 1pt; }
-
-/* Body */
-.body {
-    padding: 5pt 8pt 0pt 8pt;
-    width: 242.65pt;
+.f-header-text {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 4pt;
 }
-.body table { width: 100%; border-collapse: collapse; }
-.body td { padding: 0; vertical-align: top; }
-
-.photo-td { width: 48pt; }
-.photo-img { width: 44pt; height: 56pt; border: 1pt solid rgba(255,255,255,0.5); }
-.photo-placeholder {
-    width: 44pt;
-    height: 56pt;
-    background-color: #047857;
-    border: 1pt solid rgba(255,255,255,0.4);
+.f-org {
+    font-size: 7.5pt;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 0.3pt;
+    line-height: 1.2;
+}
+.f-sub {
+    font-size: 5pt;
+    color: #6ee7b7;
+    margin-top: 1pt;
+    letter-spacing: 0.2pt;
+}
+.f-header-badge {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    width: 50pt;
+}
+.f-badge {
+    font-size: 4.5pt;
+    color: #a7f3d0;
+    border: 0.5pt solid #a7f3d0;
+    padding: 1pt 3pt;
     text-align: center;
-    line-height: 56pt;
-    font-size: 18pt;
-    font-weight: bold;
-    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
 }
 
-.info-td { padding-left: 7pt; }
-.w-name  { font-size: 9pt; font-weight: bold; color: #ffffff; line-height: 1.15; margin-bottom: 3pt; }
-.w-desig { font-size: 6.5pt; color: #6ee7b7; font-weight: bold; margin-bottom: 2pt; }
-.w-dept  { font-size: 5.5pt; color: #d1fae5; margin-bottom: 1.5pt; }
-.w-no    {
-    font-size: 6.5pt;
+/* ── Green accent stripe under header ── */
+.f-stripe {
+    width: 100%;
+    height: 3pt;
+    background: linear-gradient(to right, #059669, #34d399, #059669);
+    background: #10b981;
+}
+
+/* ── Body ── */
+.f-body {
+    padding: 6pt 7pt 0pt 7pt;
+    display: table;
+    width: 100%;
+}
+
+/* Photo column */
+.f-photo-col {
+    display: table-cell;
+    vertical-align: top;
+    width: 50pt;
+}
+.f-photo-wrap {
+    width: 46pt;
+    height: 58pt;
+    border: 2pt solid #064e3b;
+    background: #ecfdf5;
+    overflow: hidden;
+    position: relative;
+}
+.f-photo-wrap img {
+    width: 42pt;
+    height: 54pt;
+    display: block;
+}
+.f-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #d1fae5;
+    text-align: center;
+    line-height: 54pt;
+    font-size: 22pt;
     font-weight: bold;
-    color: #d1fae5;
+    color: #064e3b;
+}
+.f-photo-label {
+    background: #064e3b;
+    color: #ffffff;
+    font-size: 4pt;
+    text-align: center;
+    padding: 1.5pt 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
+}
+
+/* Info column */
+.f-info-col {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 7pt;
+}
+.f-name {
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #064e3b;
+    line-height: 1.2;
+    margin-bottom: 2pt;
+    text-transform: uppercase;
+}
+.f-desig {
+    font-size: 6pt;
+    font-weight: bold;
+    color: #059669;
+    text-transform: uppercase;
+    letter-spacing: 0.2pt;
+    margin-bottom: 3pt;
+}
+.f-dept-row {
+    display: table;
+    width: 100%;
+    margin-bottom: 1.5pt;
+}
+.f-dept-label {
+    display: table-cell;
+    font-size: 4.5pt;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.2pt;
+    width: 35pt;
+    vertical-align: top;
+}
+.f-dept-value {
+    display: table-cell;
+    font-size: 5pt;
+    color: #1f2937;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+/* ID number chip */
+.f-id-chip {
+    margin-top: 5pt;
+    background: #064e3b;
+    color: #ffffff;
+    font-size: 7.5pt;
+    font-weight: bold;
     font-family: 'Courier New', monospace;
-    margin-top: 5pt;
-    padding-top: 3pt;
-    border-top: 0.5pt solid rgba(255,255,255,0.2);
+    padding: 2.5pt 5pt;
+    display: inline-block;
+    letter-spacing: 1pt;
 }
 
-/* Footer bar */
-.ftr {
-    background-color: #043a28;
-    border-top: 0.8pt solid rgba(255,255,255,0.25);
-    padding: 4pt 8pt;
+/* ── Footer band ── */
+.f-footer {
+    background: #064e3b;
+    width: 100%;
+    padding: 4pt 7pt;
+    display: table;
     margin-top: 5pt;
-    width: 242.65pt;
+    border-top: 1.5pt solid #10b981;
 }
-.ftr table { width: 100%; border-collapse: collapse; }
-.ftr td { padding: 0; vertical-align: middle; }
-.exp-label { font-size: 5pt; color: #6ee7b7; }
-.exp-val   { font-size: 7pt; font-weight: bold; color: #ffffff; margin-top: 1pt; }
-.qr-wrap   { width: 32pt; text-align: right; }
-.qr-inner  { background-color: #ffffff; padding: 2pt; display: inline-block; }
-.qr-inner img { width: 28pt; height: 28pt; display: block; }
+.f-footer-left {
+    display: table-cell;
+    vertical-align: middle;
+}
+.f-footer-center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.f-footer-right {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    width: 36pt;
+}
+.f-exp-label {
+    font-size: 4.5pt;
+    color: #6ee7b7;
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
+}
+.f-exp-val {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 1pt;
+}
+.f-sig-line {
+    width: 55pt;
+    border-top: 0.5pt solid rgba(255,255,255,0.5);
+    margin: 1pt auto 1pt auto;
+}
+.f-sig-label {
+    font-size: 4pt;
+    color: #a7f3d0;
+    text-align: center;
+}
+.f-qr-wrap {
+    background: #ffffff;
+    padding: 2pt;
+    display: inline-block;
+}
+.f-qr-wrap img {
+    width: 26pt;
+    height: 26pt;
+    display: block;
+}
 
-/* Issuer signature area */
-.sig-line  { border-top: 0.5pt solid rgba(255,255,255,0.4); width: 60pt; margin-top: 1pt; }
-.sig-label { font-size: 4.5pt; color: #a7f3d0; margin-top: 1pt; }
-
-/* ─── BACK ─── */
+/* ══════════════════════════════════════════
+   BACK
+══════════════════════════════════════════ */
 .back {
     width: 242.65pt;
     height: 153.07pt;
-    background-color: #f0fdf4;
+    background: #ffffff;
     overflow: hidden;
 }
 
-.back-hdr {
-    background-color: #064e3b;
+/* ── Back header ── */
+.b-header {
+    background: #064e3b;
+    width: 100%;
     padding: 5pt 8pt;
     text-align: center;
-    width: 242.65pt;
-    border-bottom: 1pt solid #047857;
+    border-bottom: 2pt solid #10b981;
 }
-.back-org  { font-size: 7pt; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 0.5pt; }
-.back-tag  { font-size: 5pt; color: #a7f3d0; margin-top: 1pt; }
+.b-org {
+    font-size: 7.5pt;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+}
+.b-tagline {
+    font-size: 4.5pt;
+    color: #6ee7b7;
+    margin-top: 1pt;
+    letter-spacing: 0.2pt;
+}
 
-.back-body { padding: 5pt 8pt 0 8pt; }
-.back-body table { width: 100%; border-collapse: collapse; }
-.back-body td { vertical-align: top; padding: 0 3pt 0 0; }
+/* ── Back info grid ── */
+.b-grid {
+    padding: 6pt 8pt 4pt 8pt;
+    display: table;
+    width: 100%;
+}
+.b-cell {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 4pt;
+    border-right: 0.5pt solid #d1fae5;
+    padding-left: 4pt;
+}
+.b-cell:first-child { padding-left: 0; }
+.b-cell:last-child  { border-right: none; }
+.b-label {
+    font-size: 4pt;
+    color: #6b7280;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.3pt;
+    margin-bottom: 2pt;
+    border-bottom: 0.5pt solid #e5e7eb;
+    padding-bottom: 1pt;
+}
+.b-value {
+    font-size: 5.5pt;
+    color: #111827;
+    line-height: 1.4;
+    font-weight: bold;
+}
+.b-value-sub {
+    font-size: 4.5pt;
+    color: #4b5563;
+    margin-top: 1pt;
+}
 
-.bl { font-size: 4.5pt; color: #6b7280; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5pt; }
-.bv { font-size: 5.5pt; color: #111827; line-height: 1.4; }
+/* Blood group highlight */
+.b-blood {
+    font-size: 9pt;
+    font-weight: bold;
+    color: #064e3b;
+}
 
-.divider { border: none; border-top: 0.5pt solid #a7f3d0; margin: 4pt 8pt; }
+/* ── Divider ── */
+.b-divider {
+    height: 0.5pt;
+    background: #d1fae5;
+    margin: 0 8pt;
+}
 
-.url-section { padding: 0 8pt; }
-.url-label { font-size: 4.5pt; color: #6b7280; text-transform: uppercase; font-weight: bold; margin-bottom: 1.5pt; }
-.url-val   { font-size: 5.5pt; color: #047857; font-weight: bold; }
-
-.back-ftr {
-    background-color: #dcfce7;
+/* ── Verification URL bar ── */
+.b-verify {
+    background: #f0fdf4;
     border-top: 0.5pt solid #a7f3d0;
-    padding: 3.5pt 8pt;
-    margin-top: 4pt;
-    width: 242.65pt;
+    border-bottom: 0.5pt solid #a7f3d0;
+    padding: 3pt 8pt;
+    display: table;
+    width: 100%;
+    margin-top: 0;
 }
-.back-ftr table { width: 100%; border-collapse: collapse; }
-.back-ftr td { vertical-align: top; padding: 0; }
-.terms  { font-size: 4pt; color: #6b7280; line-height: 1.5; }
-.ci     { text-align: right; }
-.ci-lbl { font-size: 4pt; color: #6b7280; }
-.ci-val { font-size: 5pt; color: #064e3b; font-weight: bold; }
+.b-verify-label {
+    display: table-cell;
+    font-size: 4pt;
+    color: #6b7280;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.3pt;
+    vertical-align: middle;
+    width: 40pt;
+}
+.b-verify-url {
+    display: table-cell;
+    font-size: 5pt;
+    color: #047857;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+/* ── Back footer ── */
+.b-footer {
+    background: #064e3b;
+    width: 100%;
+    padding: 4pt 8pt;
+    display: table;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.b-footer-terms {
+    display: table-cell;
+    font-size: 4pt;
+    color: #a7f3d0;
+    line-height: 1.6;
+    vertical-align: middle;
+    width: 68%;
+}
+.b-footer-contact {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+.b-contact-label {
+    font-size: 4pt;
+    color: #6ee7b7;
+    text-transform: uppercase;
+    letter-spacing: 0.2pt;
+}
+.b-contact-val {
+    font-size: 5pt;
+    color: #ffffff;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
 
-{{-- ═══════════ FRONT ═══════════ --}}
+{{-- ══════════════════ FRONT ══════════════════ --}}
 <div class="front">
 
-    <div class="hdr">
-        <table>
-            <tr>
-                <td style="width: 24pt;">
-                    <div class="logo-circle"><span class="logo-text">LGA</span></div>
-                </td>
-                <td>
-                    <div class="hdr-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
-                    <div class="hdr-sub">Official Resident Identity Card</div>
-                </td>
-            </tr>
-        </table>
+    {{-- Header --}}
+    <div class="f-header">
+        <div class="f-header-logo">
+            <div class="f-logo-circle">LGA</div>
+        </div>
+        <div class="f-header-text">
+            <div class="f-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
+            <div class="f-sub">Lagos State &bull; Federal Republic of Nigeria</div>
+        </div>
+        <div class="f-header-badge">
+            <div class="f-badge">Official<br>ID Card</div>
+        </div>
+    </div>
+    <div class="f-stripe"></div>
+
+    {{-- Body --}}
+    <div class="f-body">
+
+        {{-- Photo --}}
+        <div class="f-photo-col">
+            @php
+                $photoPath = $worker->hasMedia('profile_photo')
+                    ? $worker->getFirstMediaPath('profile_photo')
+                    : null;
+            @endphp
+            <div class="f-photo-wrap">
+                @if($photoPath && file_exists($photoPath))
+                    <img src="{{ $photoPath }}" alt="">
+                @else
+                    <div class="f-photo-placeholder">{{ strtoupper(substr($worker->surname, 0, 1)) }}</div>
+                @endif
+            </div>
+            <div class="f-photo-label">Photo</div>
+        </div>
+
+        {{-- Info --}}
+        <div class="f-info-col">
+            <div class="f-name">{{ $worker->full_name }}</div>
+            @if($worker->designation)
+                <div class="f-desig">{{ $worker->designation }}</div>
+            @endif
+
+            @if($worker->department)
+            <div class="f-dept-row">
+                <div class="f-dept-label">Dept.</div>
+                <div class="f-dept-value">{{ $worker->department->name }}</div>
+            </div>
+            @endif
+
+            @php
+                $stateName = $worker->state?->name ?? $worker->state_name ?? '—';
+                $lgaName   = $worker->lga?->name   ?? $worker->lga_name   ?? '—';
+            @endphp
+            <div class="f-dept-row">
+                <div class="f-dept-label">State</div>
+                <div class="f-dept-value">{{ $stateName }}</div>
+            </div>
+            <div class="f-dept-row">
+                <div class="f-dept-label">LGA</div>
+                <div class="f-dept-value">{{ $lgaName }}</div>
+            </div>
+
+            <div class="f-id-chip">{{ $worker->staff_number }}</div>
+        </div>
+
     </div>
 
-    <div class="body">
-        <table>
-            <tr>
-                <td class="photo-td">
-                    @php
-                        $photoPath = $worker->hasMedia('profile_photo')
-                            ? $worker->getFirstMediaPath('profile_photo')
-                            : null;
-                    @endphp
-                    @if($photoPath && file_exists($photoPath))
-                        <img src="{{ $photoPath }}" class="photo-img" alt="">
-                    @else
-                        <div class="photo-placeholder">{{ strtoupper(substr($worker->surname, 0, 1)) }}</div>
-                    @endif
-                </td>
-                <td class="info-td">
-                    <div class="w-name">{{ strtoupper($worker->full_name) }}</div>
-                    @if($worker->designation)
-                        <div class="w-desig">{{ $worker->designation }}</div>
-                    @endif
-                    <div class="w-dept" style="font-size: 5pt;">Ayobo Ipaja Local Council Development Area</div>
-                    <div class="w-dept" style="font-size: 5pt;">Igbogila, Ipaja Road. Lagos</div>
-                    <div class="w-no">ID: {{ $worker->staff_number }}</div>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="ftr">
-        <table>
-            <tr>
-                <td>
-                    <div class="exp-label">EXPIRES</div>
-                    <div class="exp-val">
-                        {{ $worker->id_expiry_date ? $worker->id_expiry_date->format('M Y') : 'N/A' }}
-                    </div>
-                    <div style="margin-top: 4pt;">
-                        <div class="sig-line"></div>
-                        <div class="sig-label">{{ config('lga.name', 'Ayobo Ipaja Local Council Development Area') }} — Authorised Signatory</div>
-                    </div>
-                </td>
-                <td class="qr-wrap">
-                    @if(!empty($qrCode))
-                        <div class="qr-inner">
-                            <img src="data:image/png;base64,{{ $qrCode }}" alt="Scan to verify">
-                        </div>
-                    @endif
-                </td>
-            </tr>
-        </table>
+    {{-- Footer --}}
+    <div class="f-footer">
+        <div class="f-footer-left">
+            <div class="f-exp-label">Expires</div>
+            <div class="f-exp-val">
+                {{ $worker->id_expiry_date ? $worker->id_expiry_date->format('M Y') : 'See Reverse' }}
+            </div>
+        </div>
+        <div class="f-footer-center">
+            <div class="f-sig-line"></div>
+            <div class="f-sig-label">Authorised Signatory</div>
+        </div>
+        <div class="f-footer-right">
+            @if(!empty($qrCode))
+                <div class="f-qr-wrap">
+                    <img src="data:image/png;base64,{{ $qrCode }}" alt="Scan to verify">
+                </div>
+            @endif
+        </div>
     </div>
 
 </div>
 
-{{-- ═══════════ BACK ═══════════ --}}
-<div class="back">
+{{-- ══════════════════ BACK ══════════════════ --}}
+<div class="back" style="position:relative;">
 
-    <div class="back-hdr">
-        <div class="back-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
-        <div class="back-tag">If found, please return to the LGA Secretariat</div>
+    {{-- Header --}}
+    <div class="b-header">
+        <div class="b-org">{{ strtoupper(config('lga.name', 'Ayobo Ipaja Local Council Development Area')) }}</div>
+        <div class="b-tagline">If found, please return to the LGA Secretariat &bull; Igbogila, Ipaja Road, Lagos</div>
     </div>
 
-    <div class="back-body">
-        <table>
-            <tr>
-                <td style="width: 42%;">
-                    <div class="bl">Emergency Contact</div>
-                    <div class="bv">{{ $worker->emergency_contact_name ?? $worker->next_of_kin_name ?? 'N/A' }}</div>
-                    <div class="bv">{{ $worker->emergency_contact_phone ?? $worker->next_of_kin_phone ?? '' }}</div>
-                </td>
-                <td style="width: 22%;">
-                    <div class="bl">Blood Group</div>
-                    <div class="bv">{{ $worker->blood_group ?? 'N/A' }}</div>
-                </td>
-                <td style="width: 18%;">
-                    <div class="bl">Gender</div>
-                    <div class="bv">{{ ucfirst($worker->gender?->value ?? 'N/A') }}</div>
-                </td>
-                <td style="width: 18%;">
-                    <div class="bl">Ward</div>
-                    <div class="bv" style="font-size: 4.5pt;">{{ $worker->ward?->name ?? ($worker->lga?->name ?? 'N/A') }}</div>
-                </td>
-            </tr>
-        </table>
+    {{-- Info grid --}}
+    <div class="b-grid">
+        <div class="b-cell" style="width:40%;">
+            <div class="b-label">Emergency Contact</div>
+            <div class="b-value">{{ $worker->emergency_contact_name ?? $worker->next_of_kin_name ?? 'N/A' }}</div>
+            <div class="b-value-sub">{{ $worker->emergency_contact_phone ?? $worker->next_of_kin_phone ?? '' }}</div>
+        </div>
+        <div class="b-cell" style="width:18%;">
+            <div class="b-label">Blood Group</div>
+            <div class="b-blood">{{ $worker->blood_group ?? 'N/A' }}</div>
+        </div>
+        <div class="b-cell" style="width:18%;">
+            <div class="b-label">Gender</div>
+            <div class="b-value">{{ ucfirst($worker->gender?->value ?? 'N/A') }}</div>
+        </div>
+        <div class="b-cell" style="width:24%;">
+            <div class="b-label">Ward / LGA</div>
+            <div class="b-value" style="font-size:4.5pt;">{{ $worker->ward?->name ?? ($worker->lga?->name ?? $worker->lga_name ?? 'N/A') }}</div>
+        </div>
     </div>
 
-    <hr class="divider">
+    <div class="b-divider"></div>
 
-    <div class="url-section">
-        <div class="url-label">Verification URL</div>
-        <div class="url-val">{{ route('verify.show', $worker->verification_code) }}</div>
+    {{-- Verification --}}
+    <div class="b-verify">
+        <div class="b-verify-label">Verify Online</div>
+        <div class="b-verify-url">{{ route('verify.show', $worker->verification_code) }}</div>
     </div>
 
-    <div class="back-ftr">
-        <table>
-            <tr>
-                <td style="width: 62%;">
-                    <div class="terms">This card is the property of {{ config('lga.name', 'Ayobo Ipaja Local Council Development Area') }}.
-                    Misuse is a punishable offence under Nigerian law. Report lost cards immediately to the LGA Secretariat.</div>
-                </td>
-                <td class="ci" style="width: 38%;">
-                    @if(config('lga.phone'))
-                        <div class="ci-lbl">Hotline</div>
-                        <div class="ci-val">{{ config('lga.phone') }}</div>
-                    @endif
-                    <div class="ci-lbl" style="margin-top: 2pt;">Website</div>
-                    <div class="ci-val" style="font-size: 4.5pt;">{{ str_replace(['https://', 'http://'], '', url('/')) }}</div>
-                </td>
-            </tr>
-        </table>
+    {{-- Footer --}}
+    <div class="b-footer">
+        <div class="b-footer-terms">
+            This card is the property of {{ config('lga.name', 'Ayobo Ipaja Local Council Development Area') }}.
+            Misuse is a punishable offence under Nigerian law.
+            Report lost cards immediately to the LGA Secretariat.
+        </div>
+        <div class="b-footer-contact">
+            @if(config('lga.phone'))
+                <div class="b-contact-label">Hotline</div>
+                <div class="b-contact-val">{{ config('lga.phone') }}</div>
+            @endif
+            <div class="b-contact-label" style="margin-top:2pt;">Web</div>
+            <div class="b-contact-val" style="font-size:4pt;">{{ str_replace(['https://','http://'],'',url('/')) }}</div>
+        </div>
     </div>
 
 </div>
