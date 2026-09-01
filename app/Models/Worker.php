@@ -39,6 +39,8 @@ class Worker extends Model implements HasMedia
         'bvn',
         'tax_number',
         'residential_address',
+        'state_name',
+        'lga_name',
         'state_id',
         'lga_id',
         'ward_id',

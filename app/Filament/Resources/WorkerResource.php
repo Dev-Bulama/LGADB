@@ -139,36 +139,84 @@ class WorkerResource extends Resource
                                 ->rows(3)
                                 ->columnSpanFull(),
 
+                            Forms\Components\Toggle::make('_manual_location')
+                                ->label('Enter State / LGA manually (not in list)')
+                                ->live()
+                                ->dehydrated(false)
+                                ->afterStateHydrated(function (Forms\Components\Toggle $component, $record) {
+                                    if ($record && $record->state_name) {
+                                        $component->state(true);
+                                    }
+                                })
+                                ->afterStateUpdated(function (Set $set, bool $state) {
+                                    if ($state) {
+                                        $set('state_id', null);
+                                        $set('lga_id', null);
+                                        $set('ward_id', null);
+                                    } else {
+                                        $set('state_name', null);
+                                        $set('lga_name', null);
+                                    }
+                                })
+                                ->columnSpanFull(),
+
                             Forms\Components\Grid::make(3)->schema([
+                                // ── Dropdown mode ─────────────────────────────
                                 Forms\Components\Select::make('state_id')
-                                    ->label('State')
+                                    ->label('State (select)')
                                     ->options(State::orderBy('name')->pluck('name', 'id'))
                                     ->searchable()
                                     ->live()
                                     ->afterStateUpdated(function (Set $set) {
                                         $set('lga_id', null);
                                         $set('ward_id', null);
-                                    }),
+                                    })
+                                    ->hidden(fn (Get $get) => (bool) $get('_manual_location')),
 
                                 Forms\Components\Select::make('lga_id')
-                                    ->label('LGA')
-                                    ->options(function (Get $get) {
+                                    ->label('LGA (select)')
+                                    ->searchable()
+                                    ->getSearchResultsUsing(function (string $search, Get $get) {
                                         $stateId = $get('state_id');
                                         if (!$stateId) return [];
-                                        return Lga::where('state_id', $stateId)->orderBy('name')->pluck('name', 'id');
+                                        return Lga::where('state_id', $stateId)
+                                            ->where('name', 'like', "%{$search}%")
+                                            ->orderBy('name')
+                                            ->limit(50)
+                                            ->pluck('name', 'id');
                                     })
-                                    ->searchable()
+                                    ->getOptionLabelUsing(fn ($value) => Lga::find($value)?->name ?? $value)
                                     ->live()
-                                    ->afterStateUpdated(fn (Set $set) => $set('ward_id', null)),
+                                    ->afterStateUpdated(fn (Set $set) => $set('ward_id', null))
+                                    ->hidden(fn (Get $get) => (bool) $get('_manual_location')),
 
                                 Forms\Components\Select::make('ward_id')
                                     ->label('Ward')
-                                    ->options(function (Get $get) {
+                                    ->searchable()
+                                    ->getSearchResultsUsing(function (string $search, Get $get) {
                                         $lgaId = $get('lga_id');
                                         if (!$lgaId) return [];
-                                        return Ward::where('lga_id', $lgaId)->orderBy('name')->pluck('name', 'id');
+                                        return Ward::where('lga_id', $lgaId)
+                                            ->where('name', 'like', "%{$search}%")
+                                            ->orderBy('name')
+                                            ->limit(50)
+                                            ->pluck('name', 'id');
                                     })
-                                    ->searchable(),
+                                    ->getOptionLabelUsing(fn ($value) => Ward::find($value)?->name ?? $value)
+                                    ->hidden(fn (Get $get) => (bool) $get('_manual_location')),
+
+                                // ── Manual text mode ──────────────────────────
+                                Forms\Components\TextInput::make('state_name')
+                                    ->label('State (type manually)')
+                                    ->placeholder('e.g. Lagos')
+                                    ->maxLength(150)
+                                    ->hidden(fn (Get $get) => ! (bool) $get('_manual_location')),
+
+                                Forms\Components\TextInput::make('lga_name')
+                                    ->label('LGA (type manually)')
+                                    ->placeholder('e.g. Alimosho')
+                                    ->maxLength(150)
+                                    ->hidden(fn (Get $get) => ! (bool) $get('_manual_location')),
                             ]),
                         ]),
 
