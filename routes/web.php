@@ -45,14 +45,14 @@ Route::get('/admin/workers/{worker}/id-card/download', function (\App\Models\Wor
     return (new \App\Services\IdCardService())->download($worker);
 })->name('admin.workers.id-card.download')->middleware(['auth']);
 
-// Public AJAX endpoint — LGAs for a given state
-Route::get('/api/lgas/{state}', function (\App\Models\State $state) {
+// Public AJAX endpoint — LGAs for a given state ID
+Route::get('/api/lgas/{stateId}', function (int $stateId) {
     return response()->json(
-        \App\Models\Lga::where('state_id', $state->id)
+        \App\Models\Lga::where('state_id', $stateId)
             ->orderBy('name')
             ->get(['id', 'name'])
     );
-})->name('api.lgas')->middleware('throttle:60,1');
+})->name('api.lgas')->middleware('throttle:60,1')->where('stateId', '[0-9]+');
 
 // Auth routes (Laravel default)
 require __DIR__.'/auth.php';

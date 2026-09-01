@@ -274,7 +274,6 @@
     </div>
 </div>
 
-@push('scripts')
 <script>
 (function () {
     const stateSelect   = document.getElementById('state_select');
@@ -326,6 +325,4 @@
     });
 })();
 </script>
-@endpush
-
 @endsection
