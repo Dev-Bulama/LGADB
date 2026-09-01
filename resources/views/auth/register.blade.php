@@ -97,13 +97,24 @@
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <h2 class="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span class="w-6 h-6 rounded-full bg-green-700 text-white text-xs flex items-center justify-center font-bold">2</span>
-                    State & LGA
+                    State &amp; LGA
                 </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {{-- Manual entry toggle --}}
+                <div class="flex items-center gap-3 mb-4">
+                    <input type="checkbox" id="manual_location" name="manual_location" value="1"
+                           {{ old('manual_location') ? 'checked' : '' }}
+                           class="w-4 h-4 accent-green-700 cursor-pointer">
+                    <label for="manual_location" class="text-sm text-gray-600 cursor-pointer select-none">
+                        My state / LGA is not in the list — I'll type it manually
+                    </label>
+                </div>
+
+                {{-- Dropdown mode --}}
+                <div id="location_dropdowns" class="grid grid-cols-1 sm:grid-cols-2 gap-4 {{ old('manual_location') ? 'hidden' : '' }}">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1.5">State of Origin <span class="text-red-500">*</span></label>
-                        <select name="state_id" required
+                        <select id="state_select" name="state_id"
                                 class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 @error('state_id') border-red-400 bg-red-50 @enderror">
                             <option value="">-- Select State --</option>
                             @foreach($states as $state)
@@ -115,7 +126,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1.5">LGA <span class="text-red-500">*</span></label>
-                        <select name="lga_id" required
+                        <select id="lga_select" name="lga_id"
                                 class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 @error('lga_id') border-red-400 bg-red-50 @enderror">
                             <option value="">-- Select LGA --</option>
                             @foreach($lgas as $lga)
@@ -124,6 +135,24 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+
+                {{-- Manual text mode --}}
+                <div id="location_manual" class="grid grid-cols-1 sm:grid-cols-2 gap-4 {{ old('manual_location') ? '' : 'hidden' }}">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">State of Origin <span class="text-red-500">*</span></label>
+                        <input type="text" id="state_name" name="state_name"
+                               value="{{ old('state_name') }}"
+                               placeholder="e.g. Lagos, Kano, Abuja..."
+                               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 @error('state_name') border-red-400 bg-red-50 @enderror">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">LGA <span class="text-red-500">*</span></label>
+                        <input type="text" id="lga_name" name="lga_name"
+                               value="{{ old('lga_name') }}"
+                               placeholder="e.g. Alimosho, Agege..."
+                               class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 @error('lga_name') border-red-400 bg-red-50 @enderror">
                     </div>
                 </div>
             </div>
@@ -244,5 +273,59 @@
 
     </div>
 </div>
+
+@push('scripts')
+<script>
+(function () {
+    const stateSelect   = document.getElementById('state_select');
+    const lgaSelect     = document.getElementById('lga_select');
+    const manualToggle  = document.getElementById('manual_location');
+    const dropdownWrap  = document.getElementById('location_dropdowns');
+    const manualWrap    = document.getElementById('location_manual');
+
+    // ── Toggle between dropdown and manual ──────────────────────────────────
+    function applyToggle() {
+        const manual = manualToggle.checked;
+        dropdownWrap.classList.toggle('hidden', manual);
+        manualWrap.classList.toggle('hidden', !manual);
+
+        // adjust required attributes
+        stateSelect.required = !manual;
+        lgaSelect.required   = !manual;
+        document.getElementById('state_name').required = manual;
+        document.getElementById('lga_name').required   = manual;
+    }
+
+    manualToggle.addEventListener('change', applyToggle);
+    applyToggle(); // run on page load (handles validation-fail repopulation)
+
+    // ── Cascade: load LGAs when state changes ───────────────────────────────
+    stateSelect.addEventListener('change', function () {
+        const stateId = this.value;
+        lgaSelect.innerHTML = '<option value="">-- Loading LGAs... --</option>';
+
+        if (!stateId) {
+            lgaSelect.innerHTML = '<option value="">-- Select LGA --</option>';
+            return;
+        }
+
+        fetch('/api/lgas/' + stateId)
+            .then(r => r.json())
+            .then(lgas => {
+                lgaSelect.innerHTML = '<option value="">-- Select LGA --</option>';
+                lgas.forEach(function (lga) {
+                    const opt = document.createElement('option');
+                    opt.value       = lga.id;
+                    opt.textContent = lga.name;
+                    lgaSelect.appendChild(opt);
+                });
+            })
+            .catch(function () {
+                lgaSelect.innerHTML = '<option value="">-- Error loading LGAs --</option>';
+            });
+    });
+})();
+</script>
+@endpush
 
 @endsection

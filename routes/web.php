@@ -45,5 +45,14 @@ Route::get('/admin/workers/{worker}/id-card/download', function (\App\Models\Wor
     return (new \App\Services\IdCardService())->download($worker);
 })->name('admin.workers.id-card.download')->middleware(['auth']);
 
+// Public AJAX endpoint — LGAs for a given state
+Route::get('/api/lgas/{state}', function (\App\Models\State $state) {
+    return response()->json(
+        \App\Models\Lga::where('state_id', $state->id)
+            ->orderBy('name')
+            ->get(['id', 'name'])
+    );
+})->name('api.lgas')->middleware('throttle:60,1');
+
 // Auth routes (Laravel default)
 require __DIR__.'/auth.php';

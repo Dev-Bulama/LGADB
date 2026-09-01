@@ -18,15 +18,23 @@ class RegisteredUserController extends Controller
 {
     public function create()
     {
+        // Pass old LGAs for the selected state on validation fail (repopulate form)
+        $oldStateId = old('state_id');
+        $lgas = $oldStateId
+            ? Lga::where('state_id', $oldStateId)->orderBy('name')->get()
+            : collect();
+
         return view('auth.register', [
             'states'      => State::orderBy('name')->get(),
-            'lgas'        => Lga::orderBy('name')->get(),
-            'departments' => Department::orderBy('name')->get(),
+            'lgas'        => $lgas,
+            'departments' => Department::where('is_active', true)->orderBy('name')->get(),
         ]);
     }
 
     public function store(Request $request)
     {
+        $manual = $request->boolean('manual_location');
+
         $request->validate([
             'surname'         => 'required|string|max:100',
             'first_name'      => 'required|string|max:100',
@@ -35,8 +43,10 @@ class RegisteredUserController extends Controller
             'date_of_birth'   => 'required|date|before:-16 years',
             'phone'           => 'required|string|max:20',
             'email'           => 'required|email|max:255|unique:users,email|unique:workers,email',
-            'state_id'        => 'required|exists:states,id',
-            'lga_id'          => 'required|exists:lgas,id',
+            'state_id'        => $manual ? 'nullable' : 'required|exists:states,id',
+            'lga_id'          => $manual ? 'nullable' : 'required|exists:lgas,id',
+            'state_name'      => $manual ? 'required|string|max:150' : 'nullable',
+            'lga_name'        => $manual ? 'required|string|max:150' : 'nullable',
             'department_id'   => 'required|exists:departments,id',
             'designation'     => 'required|string|max:150',
             'employment_type' => 'required|in:permanent,contract,temporary,casual',
@@ -62,8 +72,10 @@ class RegisteredUserController extends Controller
             'date_of_birth'   => $request->date_of_birth,
             'phone'           => $request->phone,
             'email'           => $request->email,
-            'state_id'        => $request->state_id,
-            'lga_id'          => $request->lga_id,
+            'state_id'        => $manual ? null : $request->state_id,
+            'lga_id'          => $manual ? null : $request->lga_id,
+            'state_name'      => $manual ? $request->state_name : null,
+            'lga_name'        => $manual ? $request->lga_name : null,
             'department_id'   => $request->department_id,
             'designation'     => $request->designation,
             'employment_type' => $request->employment_type,
